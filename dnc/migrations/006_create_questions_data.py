@@ -1,7 +1,12 @@
 steps = [
     [
         """
-        INSERT INTO questions(question, answer, option_1, option_2, option_3) VALUES
+        INSERT INTO questions(
+            question
+            , answer
+            , option_1
+            , option_2
+            , option_3) VALUES
         ('What is a correct syntax to output "Hello World" in Python',
         'print("Hello World")',
         'p("Hello World")',
@@ -17,12 +22,14 @@ steps = [
         '.py',
         '.pyt',
         '.pt'),
-        ('What is the output of the following code? a = [1, 2, 3] b = a b[0] = 5 print(a)',
+        ('What is the output of the following code?
+        a = [1, 2, 3] b = a b[0] = 5 print(a)',
         '[1, 2, 3]',
         '[1, 2, 3]',
         '[5, 2, 3]',
         '[1, 2, 3, 5]'),
-        ('Suppose my_list is [3, 6, 12, 24, 5, 10, 15, 20]. Which of the statements returns the following list [6, 24, 10, 20]?',
+        ('Suppose my_list is [3, 6, 12, 24, 5, 10, 15, 20].
+        Which of the statements returns the following list [6, 24, 10, 20]?',
         'print(my_list[1::2])',
         'print(my_list[::2]))',
         'print(my_list[1::2])',
@@ -30,7 +37,7 @@ steps = [
         ('What is the correct way to import the "math" module in Python?',
         'import math',
         'import math',
-        'include math', 
+        'include math',
         'use math'),
         ('How do you create a tuple in python?',
         'using parentheses ()',
@@ -42,7 +49,8 @@ steps = [
         'True',
         'False',
         'Error'),
-        ('Given that num1 = 7 num2 = 3, what is the output of num3 if: num3 = num1 % num2?',
+        ('Given that num1 = 7 num2 = 3,
+        what is the output of num3 if: num3 = num1 % num2?',
         '1',
         '0',
         '1',
