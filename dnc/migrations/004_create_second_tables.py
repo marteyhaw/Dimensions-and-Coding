@@ -11,7 +11,6 @@ steps = [
         # Drop the table
         """
         DROP TABLE maps;
-        """
-
+        """,
     ]
 ]

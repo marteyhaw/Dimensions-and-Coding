@@ -10,7 +10,6 @@ steps = [
         """,
         """
         DROP TABLE class;
-        """
+        """,
     ]
-
 ]
