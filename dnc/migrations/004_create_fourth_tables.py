@@ -12,5 +12,18 @@ steps = [
         """
         DROP TABLE maps;
         """,
-    ]
+    ],
+    [
+        # "Up" SQL statement
+        """
+        CREATE TABLE inventories (
+            character_id INTEGER REFERENCES characters(id) ON DELETE CASCADE,
+            item_id INTEGER REFERENCES items(id) ON DELETE CASCADE
+        );
+        """,
+        # "Down" SQL statement
+        """
+        DROP TABLE inventories;
+        """,
+    ],
 ]
