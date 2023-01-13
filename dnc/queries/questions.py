@@ -2,8 +2,10 @@ from pydantic import BaseModel
 from typing import Optional
 from queries.pool import pool
 
+
 class Error(BaseModel):
     message: str
+
 
 class Questions(BaseModel):
     question: str
@@ -12,6 +14,7 @@ class Questions(BaseModel):
     option_2: str
     option_3: str
 
+
 class QuestionOut(BaseModel):
     id: int
     question: str
@@ -19,6 +22,7 @@ class QuestionOut(BaseModel):
     option_1: str
     option_2: str
     option_3: str
+
 
 class QuestionsRepository:
     def get_one(self, question_id: int) -> Optional[QuestionOut]:
@@ -36,7 +40,7 @@ class QuestionsRepository:
                         FROM questions
                         WHERE id = %s
                         """,
-                        [question_id]
+                        [question_id],
                     )
                     record = result.fetchone()
                     return self.record_to_question_out(record)
@@ -45,10 +49,10 @@ class QuestionsRepository:
 
     def record_to_question_out(self, record):
         return QuestionOut(
-            id = record[0],
-            question = record [1],
-            answer = record [2],
-            option_1 = record [3],
-            option_2 = record [4],
-            option_3 = record [5],
+            id=record[0],
+            question=record[1],
+            answer=record[2],
+            option_1=record[3],
+            option_2=record[4],
+            option_3=record[5],
         )
