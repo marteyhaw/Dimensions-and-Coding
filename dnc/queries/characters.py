@@ -1,0 +1,204 @@
+from pydantic import BaseModel
+from typing import Union, List, Optional
+from queries.pool import pool
+
+
+class Error(BaseModel):
+    message: str
+
+
+class CharacterClass(BaseModel):
+    id: int
+    name: str
+
+
+class CharacterUpdate(BaseModel):
+    quest_id: Optional[int]
+    health: Optional[int]
+    currency: Optional[int]
+
+
+class CharacterIn(BaseModel):
+    name: str
+    class_id: int
+
+
+class CharacterOut(BaseModel):
+    id = int
+    user_id: int
+    name: str
+    class_id: int
+    img_url: int
+    quest_id: int
+    health: int
+    currency: int
+
+
+class CharacterRepo:
+    def create_character(
+        self,
+        character: CharacterIn,
+        user_id: int = 0,
+        img_url: int = 0,
+        quest_id: int = 1,
+        health: int = 5,
+        currency: int = 0,
+    ) -> CharacterOut:
+        # try:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+
+                result = db.execute(
+                    """
+                        INSERT INTO characters
+                            (
+                                user_id,
+                                name,
+                                class_id,
+                                img_url,
+                                quest_id,
+                                health,
+                                currency
+                            )
+                        VALUES
+                            (%s,%s,%s,%s,%s,%s,%s)
+                        RETURNING id;
+                        """,
+                    [
+                        user_id,
+                        character.name,
+                        character.class_id,
+                        img_url,
+                        quest_id,
+                        health,
+                        currency,
+                    ],
+                )
+
+                id = result.fetchone()[0]
+
+                # class_info = db.execute(
+                #     """
+                #     SELECT *
+                #     FROM class
+                #     WHERE id = %s;
+                #     """,
+                #     [character.class_id]
+                # )
+                # class_info_x = class_info.fetchone()
+                # class_info_record = {}
+                # class_info_record['id'] = class_info_x[0]
+                # class_info_record['name'] = class_info_x[1]
+                # print("class info record", class_info_record)
+                old_data = character.dict()
+                old_data["class_id"] = character.class_id
+                old_data["user_id"] = user_id
+                old_data["img_url"] = img_url
+                old_data["quest_id"] = quest_id
+                old_data["health"] = health
+                old_data["currency"] = currency
+                return CharacterOut(id=id, **old_data)
+
+    # except Exception:
+    #     return {"message": "error!"}
+
+    def get_characters_by_userid(
+        self, user_id: int
+    ) -> Union[Error, List[CharacterOut]]:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
+                    SELECT *
+                    FROM characters
+                    WHERE user_id = %s
+                    """,
+                    [user_id],
+                )
+
+                result = []
+                for record in db:
+                    characters = CharacterOut(
+                        id=record[0],
+                        user_id=record[1],
+                        name=record[2],
+                        class_id=record[3],
+                        img_url=record[4],
+                        quest_id=record[5],
+                        health=record[6],
+                        currency=record[7],
+                    )
+                    result.append(characters)
+                return result
+                # record = result.fetchone()
+                # return self.record_to_character_out(record)
+
+    def get_character_by_characterid(self, character_id: int) -> CharacterOut:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
+                    SELECT *
+                    FROM characters
+                    WHERE id = %s
+                    """,
+                    [character_id],
+                )
+
+                record = result.fetchone()
+                return self.record_to_character_out(record)
+
+    def record_to_character_out(self, record):
+        return CharacterOut(
+            id=record[0],
+            user_id=record[1],
+            name=record[2],
+            class_id=record[3],
+            img_url=record[4],
+            quest_id=record[5],
+            health=record[6],
+            currency=record[7],
+        )
+
+    def update(
+        self, character_id: int, character: CharacterUpdate
+    ) -> CharacterOut:
+
+        update_strings = []
+
+        if character.quest_id is not None:
+            update_strings.append(f"quest_id = {character.quest_id}")
+        if character.health is not None:
+            update_strings.append(f"health = {character.health}")
+        if character.currency is not None:
+            update_strings.append(f"currency = {character.currency}")
+
+        inserted_string = ", ".join(update_strings)
+
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                result = db.execute(
+                    f"UPDATE characters "
+                    f"SET "
+                    f"{inserted_string} "
+                    f" WHERE id = {character_id} "
+                    f"returning *;"
+                )
+                record = result.fetchone()
+                return self.record_to_character_out(record)
+
+    def delete(self, character_id: int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        DELETE FROM characters
+                        WHERE id = %s
+                        """,
+                        [character_id],
+                    )
+                    return True
+        except Exception as e:
+            print(e)
+            return False

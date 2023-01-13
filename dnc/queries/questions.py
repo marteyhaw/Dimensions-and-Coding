@@ -45,6 +45,7 @@ class QuestionsRepository:
                     record = result.fetchone()
                     return self.record_to_question_out(record)
         except Exception as e:
+            print(e)
             return {"message": "Could not get that question"}
 
     def record_to_question_out(self, record):

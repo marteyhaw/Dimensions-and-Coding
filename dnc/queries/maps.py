@@ -2,13 +2,14 @@ from pydantic import BaseModel
 from queries.pool import pool
 
 
-## Datatypes we are accepting, essentially models from django
+# Datatypes we are accepting, essentially models from django
 class MapsIn(BaseModel):
     quest_id: int
 
 
-## Datatypes we are sending. We'll be sending name & quest_id so that our front end
-## can choose which map to display
+# Datatypes we are sending.
+# We'll be sending name & quest_id so that our front end
+# can choose which map to display
 class MapsOut(BaseModel):
     id: int
     quest_id: int
@@ -16,7 +17,8 @@ class MapsOut(BaseModel):
 
 
 class MapsRepo(BaseModel):
-    ## This is the get request repo, unsure of this logic: (self, maps: MapsIn) -> MapsOut:
+    # This is the get request repo, unsure of this
+    # logic: (self, maps: MapsIn) -> MapsOut:
     def get(self, maps: MapsIn) -> MapsOut:
         # connect the database
         with pool.connection() as conn:
@@ -32,14 +34,16 @@ class MapsRepo(BaseModel):
                     """,
                     [maps.quest_id],
                 )
-                ## not completely sure of fetchone
-                ## is it instances of data?
-                ## I understand that [0] == to the first datatype we defined, but why is the data indexed?
+                # not completely sure of fetchone
+                # is it instances of data?
+                # I understand that [0] == to the first datatype we defined,
+                #  but why is the data indexed?
                 record = result.fetchone()
                 id = record[0]
                 name = record[2]
                 # Return new data
-                ## is this a dictionary containing all of the data?
+                # is this a dictionary containing all of the data?
                 old_data = maps.dict()
-                ## old topic in django too, but why set id=id more of a curiosity question
+                # old topic in django too, but why
+                # set id=id more of a curiosity question
                 return MapsOut(id=id, name=name, **old_data)

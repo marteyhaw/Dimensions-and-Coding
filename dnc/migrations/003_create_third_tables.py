@@ -7,7 +7,7 @@ steps = [
             name VARCHAR(100) NOT NULL,
             class_id INTEGER REFERENCES class(id),
             img_url INTEGER DEFAULT 0,
-            quest_id INTEGER DEFAULT 0 UNIQUE REFERENCES quests(id),
+            quest_id INTEGER DEFAULT 0,
             health INTEGER DEFAULT 5,
             currency INTEGER DEFAULT 0
         );
@@ -17,3 +17,5 @@ steps = [
         """,
     ]
 ]
+
+# quest_id INTEGER DEFAULT 0 UNIQUE REFERENCES quests(id)
