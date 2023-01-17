@@ -27,7 +27,7 @@ class CharacterOut(BaseModel):
     id = int
     user_id: int
     name: str
-    class_id: int
+    class_id: CharacterClass
     img_url: int
     quest_id: int
     health: int
@@ -37,7 +37,7 @@ class CharacterOut(BaseModel):
 class CharacterRepo:
     def create_character(
         self,
-        character: CharacterIn,
+        character: CharacterClass,
         user_id: int = 0,
         img_url: int = 0,
         quest_id: int = 1,
@@ -77,21 +77,21 @@ class CharacterRepo:
 
                 id = result.fetchone()[0]
 
-                # class_info = db.execute(
-                #     """
-                #     SELECT *
-                #     FROM class
-                #     WHERE id = %s;
-                #     """,
-                #     [character.class_id]
-                # )
-                # class_info_x = class_info.fetchone()
-                # class_info_record = {}
-                # class_info_record['id'] = class_info_x[0]
-                # class_info_record['name'] = class_info_x[1]
-                # print("class info record", class_info_record)
+                class_info = db.execute(
+                    """
+                    SELECT *
+                    FROM class
+                    WHERE id = %s;
+                    """,
+                    [character.class_id]
+                )
+                class_info_x = class_info.fetchone()
+                class_info_record = {}
+                class_info_record['id'] = class_info_x[0]
+                class_info_record['name'] = class_info_x[1]
+                print("class info record", class_info_record)
                 old_data = character.dict()
-                old_data["class_id"] = character.class_id
+                old_data["class_id"] = class_info_record
                 old_data["user_id"] = user_id
                 old_data["img_url"] = img_url
                 old_data["quest_id"] = quest_id
@@ -109,8 +109,11 @@ class CharacterRepo:
             with conn.cursor() as db:
                 result = db.execute(
                     """
-                    SELECT *
+                    SELECT characters.id, user_id, characters.name,
+                    img_url, quest_id, health, currency,class.id, class.name
                     FROM characters
+                    JOIN class
+                    ON class_id = class.id
                     WHERE user_id = %s
                     """,
                     [user_id],
@@ -118,15 +121,16 @@ class CharacterRepo:
 
                 result = []
                 for record in db:
+                    class_record = CharacterClass(id = record[7], name = record[8])
                     characters = CharacterOut(
                         id=record[0],
                         user_id=record[1],
                         name=record[2],
-                        class_id=record[3],
-                        img_url=record[4],
-                        quest_id=record[5],
-                        health=record[6],
-                        currency=record[7],
+                        class_id= class_record,
+                        img_url=record[3],
+                        quest_id=record[4],
+                        health=record[5],
+                        currency=record[6],
                     )
                     result.append(characters)
                 return result
@@ -138,9 +142,12 @@ class CharacterRepo:
             with conn.cursor() as db:
                 result = db.execute(
                     """
-                    SELECT *
+                    SELECT characters.id, user_id, characters.name,
+                    img_url, quest_id, health, currency,class.id, class.name
                     FROM characters
-                    WHERE id = %s
+                    JOIN class
+                    ON class_id = class.id
+                    WHERE characters.id = %s
                     """,
                     [character_id],
                 )
@@ -149,16 +156,29 @@ class CharacterRepo:
                 return self.record_to_character_out(record)
 
     def record_to_character_out(self, record):
+        class_record = CharacterClass(id = record[7],name = record[8])
         return CharacterOut(
             id=record[0],
             user_id=record[1],
             name=record[2],
-            class_id=record[3],
+            class_id= class_record,
+            img_url=record[3],
+            quest_id=record[4],
+            health=record[5],
+            currency=record[6]
+            )
+
+    def record_to_character_out_update(self, record):
+        return CharacterOut(
+            id=record[0],
+            user_id=record[1],
+            name=record[2],
+            class_id= [3],
             img_url=record[4],
             quest_id=record[5],
             health=record[6],
-            currency=record[7],
-        )
+            currency=record[7]
+            )
 
     def update(
         self, character_id: int, character: CharacterUpdate
@@ -177,14 +197,26 @@ class CharacterRepo:
 
         with pool.connection() as conn:
             with conn.cursor() as db:
-                result = db.execute(
+                db.execute(
                     f"UPDATE characters "
                     f"SET "
                     f"{inserted_string} "
                     f" WHERE id = {character_id} "
-                    f"returning *;"
+                    f";"
                 )
-                record = result.fetchone()
+
+                class_result = db.execute(
+                    """
+                    SELECT characters.id, user_id, characters.name,
+                    img_url, quest_id, health, currency,class.id, class.name
+                    FROM characters
+                    JOIN class
+                    ON class_id = class.id
+                    WHERE characters.id = %s
+                    """,
+                    [character_id],
+                )
+                record = class_result.fetchone()
                 return self.record_to_character_out(record)
 
     def delete(self, character_id: int) -> bool:
