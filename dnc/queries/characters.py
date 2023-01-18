@@ -121,12 +121,12 @@ class CharacterRepo:
 
                 result = []
                 for record in db:
-                    class_record = CharacterClass(id = record[7], name = record[8])
+                    class_record = CharacterClass(id=record[7], name=record[8])
                     characters = CharacterOut(
                         id=record[0],
                         user_id=record[1],
                         name=record[2],
-                        class_id= class_record,
+                        class_id=class_record,
                         img_url=record[3],
                         quest_id=record[4],
                         health=record[5],
@@ -156,12 +156,12 @@ class CharacterRepo:
                 return self.record_to_character_out(record)
 
     def record_to_character_out(self, record):
-        class_record = CharacterClass(id = record[7],name = record[8])
+        class_record = CharacterClass(id=record[7], name=record[8])
         return CharacterOut(
             id=record[0],
             user_id=record[1],
             name=record[2],
-            class_id= class_record,
+            class_id=class_record,
             img_url=record[3],
             quest_id=record[4],
             health=record[5],
@@ -173,7 +173,7 @@ class CharacterRepo:
             id=record[0],
             user_id=record[1],
             name=record[2],
-            class_id= [3],
+            class_id=record[3],
             img_url=record[4],
             quest_id=record[5],
             health=record[6],
