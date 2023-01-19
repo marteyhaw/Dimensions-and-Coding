@@ -1,0 +1,5 @@
+# (name)
+('Pixellated Tavern'),
+('Bar in the Void'),
+('Not-so-general General Store'),
+('Party Store')

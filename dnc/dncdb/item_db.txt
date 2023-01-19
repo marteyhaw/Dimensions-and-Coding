@@ -1,0 +1,5 @@
+# (name, img, description, price)
+('Ancient Sword', 'ancient_sword.jpg', 'An ancient sword.', 1),
+('Mythril Armor', 'mythril_armor.jpg', 'Armor made out of mythril.', 1),
+('Adamantium Shield', 'adamantium_shield.jpg', 'Shield made out of adamantium.', 1),
+('Party Hat', 'party_hat.jpg', 'A party hat.', 1)
