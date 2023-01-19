@@ -49,6 +49,7 @@ services:
     volumes:
       - ./dnc:/app
     environment:
+      SIGNING_KEY: ${SIGNING_KEY}
       DATABASE_URL: postgresql://dnc:password@postgres/dnc
       WAIT_HOSTS: postgres:5432
       PORT: 8000
@@ -61,6 +62,7 @@ services:
     volumes:
       - ./user:/app
     environment:
+      SIGNING_KEY: ${SIGNING_KEY}
       DATABASE_URL: postgresql://users:password@postgres/users
       WAIT_HOSTS: postgres:5432
       PORT: 8001
