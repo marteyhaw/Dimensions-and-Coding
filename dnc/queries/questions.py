@@ -57,3 +57,83 @@ class QuestionsRepository:
             option_2=record[4],
             option_3=record[5],
         )
+
+
+class AnswersRepo:
+    def check_answer(
+        self,
+        question_id: int,
+        character_id: int,
+        char_answer: int,
+    ):
+
+        with pool.connection() as conn:
+
+            with conn.cursor() as db:
+
+                sql_question_info = db.execute(
+                    """
+                        SELECT answer, option_1, option_2, option_3
+                        FROM questions
+                        WHERE id = %s
+                        """,
+                    [question_id],
+                )
+                question_info = sql_question_info.fetchone()
+                answer = question_info[0]
+                char_answer_str = question_info[char_answer]
+
+                # If answer is right
+                if char_answer_str == answer:
+
+                    # Add reward/currency
+                    get_currency = db.execute(
+                        """
+                            SELECT currency
+                            FROM characters
+                            WHERE id = %s
+                            """,
+                        [character_id],
+                    )
+                    current_currency = get_currency.fetchone()[0]
+                    new_currency = current_currency + 1
+                    db.execute(
+                        """
+                            UPDATE characters
+                            SET currency = %s
+                            WHERE id = %s
+                            """,
+                        [new_currency, character_id],
+                    )
+                    return True
+                else:
+
+                    get_health = db.execute(
+                        """
+                            SELECT health
+                            FROM characters
+                            WHERE id = %s
+                            """,
+                        [character_id],
+                    )
+                    current_health = get_health.fetchone()[0]
+                    new_health = current_health - 1
+                    if new_health == 0:
+                        db.execute(
+                            """
+                            UPDATE characters
+                            SET health = 5
+                            WHERE id = %s
+                            """,
+                            [character_id],
+                        )
+                    else:
+                        db.execute(
+                            """
+                            UPDATE characters
+                            SET health = %s
+                            WHERE id = %s
+                            """,
+                            [current_health, character_id],
+                        )
+                    return False
