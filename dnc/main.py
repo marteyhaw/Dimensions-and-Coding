@@ -1,12 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import maps, characters, shops
+from routers import maps, characters, shops, inventories
 import os
 
 app = FastAPI()
 app.include_router(maps.router)
 app.include_router(characters.router)
 app.include_router(shops.router)
+app.include_router(inventories.router)
 
 app.add_middleware(
     CORSMiddleware,
