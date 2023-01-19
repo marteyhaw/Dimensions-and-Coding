@@ -9,6 +9,7 @@ from queries.inventories import (
     HttpError,
     CharacterInventory,
     InventoriesRepository,
+    CharacterDetails,
 )
 
 
@@ -32,3 +33,18 @@ def add_item_to_inventory(
             detail="Unable to finish that transaction.",
         )
     return character_inventory
+
+
+@router.get("/inventories/{character_id}")
+def get_character_details(
+    character_id: int,
+    repo: InventoriesRepository = Depends(),
+) -> CharacterDetails:
+    try:
+        character_details = repo.get_character_details(character_id)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Unable to retrieve character details.",
+        )
+    return character_details
