@@ -19,6 +19,13 @@ def character_creation(
     return repo.create_character(character)
 
 
+@router.get("/classes")
+def get_all_classes(
+    repo: CharacterRepo = Depends(),
+) -> CharacterOut:
+    return repo.get_classes()
+
+
 @router.get("/characters/user/{user_id}")
 def get_user_characters(
     user_id: int,

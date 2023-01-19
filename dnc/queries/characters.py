@@ -13,6 +13,7 @@ class CharacterClass(BaseModel):
 
 
 class CharacterUpdate(BaseModel):
+    img_url: Optional[str]
     quest_id: Optional[int]
     health: Optional[int]
     currency: Optional[int]
@@ -28,18 +29,21 @@ class CharacterOut(BaseModel):
     user_id: int
     name: str
     class_id: CharacterClass
-    img_url: int
+    img_url: str
     quest_id: int
     health: int
     currency: int
 
 
 class CharacterRepo:
+    url_1 = "https://jamestownnd.gov/wp-content/"
+    url_2 = "uploads/2018/06/blank-silhouette.png"
+
     def create_character(
         self,
         character: CharacterClass,
         user_id: int = 0,
-        img_url: int = 0,
+        img_url: str = url_1+url_2,
         quest_id: int = 1,
         health: int = 5,
         currency: int = 0,
@@ -186,6 +190,8 @@ class CharacterRepo:
 
         update_strings = []
 
+        if character.img_url is not None:
+            update_strings.append(f"img_url = '{character.img_url}'")
         if character.quest_id is not None:
             update_strings.append(f"quest_id = {character.quest_id}")
         if character.health is not None:
@@ -234,3 +240,22 @@ class CharacterRepo:
         except Exception as e:
             print(e)
             return False
+
+    def get_classes(self) -> List[CharacterClass]:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
+                    SELECT *
+                    FROM class
+                    """
+                )
+
+                result = []
+                for record in db:
+                    classes = CharacterClass(
+                        id=record[0],
+                        name=record[1],
+                    )
+                    result.append(classes)
+                return result
