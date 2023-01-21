@@ -13,7 +13,7 @@ def get_question(
     return repo.get_one(question_id)
 
 
-@router.get("/questions/answer/")
+@router.get("/questions/answer/", response_model=bool)
 def check_answer(
     response: Response,
     question_id: int = 0,

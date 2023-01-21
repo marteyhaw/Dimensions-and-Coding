@@ -89,21 +89,23 @@ class AnswersRepo:
                     # Add reward/currency
                     get_currency = db.execute(
                         """
-                            SELECT currency
+                            SELECT currency, quest_id
                             FROM characters
-                            WHERE id = %s
+                            WHERE id = %s;
                             """,
                         [character_id],
                     )
-                    current_currency = get_currency.fetchone()[0]
+                    current_currency, current_quest = get_currency.fetchone()
+                    new_quest = current_quest + 1
                     new_currency = current_currency + 1
                     db.execute(
                         """
                             UPDATE characters
-                            SET currency = %s
-                            WHERE id = %s
+                            SET currency = %s,
+                            quest_id = %s
+                            WHERE id = %s;
                             """,
-                        [new_currency, character_id],
+                        [new_currency, new_quest, character_id],
                     )
                     return True
                 else:

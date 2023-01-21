@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import maps, characters, questions, shops, inventories
+from routers import maps, characters, questions, shops, inventories, quests
 import os
 
 app = FastAPI()
@@ -9,6 +9,7 @@ app.include_router(characters.router)
 app.include_router(questions.router)
 app.include_router(shops.router)
 app.include_router(inventories.router)
+app.include_router(quests.router)
 
 app.add_middleware(
     CORSMiddleware,
