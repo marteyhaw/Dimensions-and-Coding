@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import Construct from './Construct.js'
-import ErrorNotification from './ErrorNotification';
-import CharacterForm from './CharacterForm.js';
-import './App.css';
+// import { useEffect, useState } from 'react';
+// import Construct from './Construct.js'
+// import ErrorNotification from './ErrorNotification';
+import CharacterForm from "./CharacterForm.js";
+import "./App.css";
 
 function App() {
   // const [launch_info, setLaunchInfo] = useState([]);
@@ -27,12 +27,11 @@ function App() {
   //   getData();
   // }, [])
 
-
   return (
     <div className="container">
       {/* <ErrorNotification error={error} />
       <Construct info={launch_info} /> */}
-      <CharacterForm/>
+      <CharacterForm />
     </div>
   );
 }
