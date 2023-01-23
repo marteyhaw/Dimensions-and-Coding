@@ -1,21 +1,22 @@
 from fastapi import APIRouter, Depends, Response
-from typing import Union
+# from typing import Union
 from queries.characters import (
     CharacterIn,
     CharacterRepo,
     CharacterOut,
     CharacterUpdate,
-    Error,
 )
 
 
 router = APIRouter()
 
 
-@router.post("/characters", response_model=Union[CharacterOut, Error])
+@router.post("/characters")
 def character_creation(
-    character: CharacterIn, response: Response, repo: CharacterRepo = Depends()
-):
+    character: CharacterIn,
+    response: Response,
+    repo: CharacterRepo = Depends()
+) -> CharacterOut:
     return repo.create_character(character)
 
 

@@ -25,7 +25,7 @@ class CharacterIn(BaseModel):
 
 
 class CharacterOut(BaseModel):
-    id = int
+    id: int
     user_id: int
     name: str
     class_id: CharacterClass
@@ -78,7 +78,6 @@ class CharacterRepo:
                         currency,
                     ],
                 )
-
                 id = result.fetchone()[0]
 
                 class_info = db.execute(
@@ -90,19 +89,18 @@ class CharacterRepo:
                     [character.class_id]
                 )
                 class_info_x = class_info.fetchone()
-                class_info_record = {}
-                class_info_record['id'] = class_info_x[0]
-                class_info_record['name'] = class_info_x[1]
-                print("class info record", class_info_record)
+                class_output = CharacterClass(
+                    id=class_info_x[0],
+                    name=class_info_x[1]
+                )
                 old_data = character.dict()
-                old_data["class_id"] = class_info_record
+                old_data["class_id"] = class_output
                 old_data["user_id"] = user_id
                 old_data["img_url"] = img_url
                 old_data["quest_id"] = quest_id
                 old_data["health"] = health
                 old_data["currency"] = currency
-                return CharacterOut(id=id, **old_data)
-
+                return CharacterOut(id=int(id), **old_data)
     # except Exception:
     #     return {"message": "error!"}
 

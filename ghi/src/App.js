@@ -1,8 +1,9 @@
 // import { useEffect, useState } from 'react';
 // import Construct from './Construct.js'
 // import ErrorNotification from './ErrorNotification';
-import CharacterForm from "./CharacterForm.js";
-import "./App.css";
+import CharacterForm from './CharacterForm.js';
+import CharacterDetails from './CharacterDetails.js';
+import './App.css';
 
 function App() {
   // const [launch_info, setLaunchInfo] = useState([]);
@@ -31,7 +32,8 @@ function App() {
     <div className="container">
       {/* <ErrorNotification error={error} />
       <Construct info={launch_info} /> */}
-      <CharacterForm />
+      <CharacterForm/>
+      <CharacterDetails/>
     </div>
   );
 }
