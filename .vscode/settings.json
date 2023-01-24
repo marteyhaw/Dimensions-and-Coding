@@ -5,5 +5,17 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[python]": {
     "editor.defaultFormatter": "ms-python.python"
-  }
+  },
+  "cSpell.words": [
+    "describedby",
+    "formik",
+    "Formik",
+    "fullname",
+    "Fullname",
+    "Martey",
+    "Navbars",
+    "newlogin",
+    "paralax",
+    "Rosheen"
+  ]
 }

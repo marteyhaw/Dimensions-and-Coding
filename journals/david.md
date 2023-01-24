@@ -70,3 +70,10 @@ Today was an exciting day for me! I spent some time going over my notes with my 
 One of the most exciting parts of the day was when I was able to create a JSON Web Token (JWT) with my user. This was a major milestone for me as it means that my authentication and authorization feature is working correctly. I am now able to secure my user's data and ensure that only authorized users have access to it.
 
 I am grateful to have classmates who are willing to help and support me in my learning journey. I am looking forward to continuing to work on my endpoints and to make more progress on my project.
+
+January 19, 2023
+Today, I worked on completing the backend for our endpoints. I was able to successfully finish this task by the help of my entire team and move on to working on the login and signup forms for the front end.
+
+While working on the form design, I had an "AHA" moment when I realized that by implementing a specific validation method, it would greatly improve the user experience and make the forms more secure. I immediately incorporated this method into my design and am excited to see the positive impact it will have.
+
+I am now writing the jsx for the visualization of the form. Overall, it was a productive day and I am looking forward to continuing my work on this project.
