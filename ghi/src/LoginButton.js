@@ -5,7 +5,7 @@ function LoginButton() {
   const navigate = useNavigate();
 
   const logInClick = () => {
-        navigate(`/login`);
+        navigate(`/ground-7-rule/login`);
     };
 
   return (

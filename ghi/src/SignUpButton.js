@@ -4,7 +4,7 @@ function SignUpButton() {
   const navigate = useNavigate();
 
   const signInClick = () => {
-    navigate(`/signup`);
+    navigate(`/ground-7-rule/signup`);
   };
 
   return (

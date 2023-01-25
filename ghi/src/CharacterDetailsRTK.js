@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as React from "react";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 import { useGetCharacterDetailsQuery } from "./store/charApi";
 
 function CharacterDetailsTwo(props) {
+  const { token } = props;
   const { data: charDetails } = useGetCharacterDetailsQuery(1);
   const [state, setState] = useState({
     top: false,
@@ -12,6 +13,8 @@ function CharacterDetailsTwo(props) {
     bottom: false,
     right: false,
   });
+
+  useEffect(() => {console.log(token)})
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (

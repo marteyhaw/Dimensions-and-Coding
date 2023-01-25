@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Swiper from "swiper/bundle";
 import { useEffect } from "react";
-import CharacterDetailsTwo from "./CharacterDetailsRTK";
+// import CharacterDetailsTwo from "./CharacterDetailsRTK";
 
 function LandingPage() {
   useEffect(() => {
@@ -52,7 +52,6 @@ function LandingPage() {
             </button>
           </Link>
         </div>
-        <CharacterDetailsTwo />
       </div>
       <div className="testimonials paralax-mf bg-image">
         <div className="overlay-mf"></div>

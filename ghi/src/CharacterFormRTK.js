@@ -153,7 +153,7 @@ function CharacterFormTwo(props) {
 
   const attemptSubmit = (e) => {
     e.preventDefault();
-    createCharacter(prepSubmit()).then(navigate("/"));
+    createCharacter(prepSubmit()).then(navigate("/ground-7-rule/"));
   };
 
   return (

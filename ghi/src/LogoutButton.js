@@ -9,7 +9,7 @@ function LogoutButton() {
 
   useEffect(() => {
     if (data) {
-      navigate('/');
+      navigate('/ground-7-rule/');
     }
   }, [data, navigate]);
 

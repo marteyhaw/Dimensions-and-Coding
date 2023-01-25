@@ -36,7 +36,7 @@ function AccountForm(props) {
               Sign up
             </p>
             {error ? (
-              <Notification type="danger">{error.data.detail}</Notification>
+              <Notification type="danger">{error?.data?.detail}</Notification>
             ) : null}
             <form
               method="POST"

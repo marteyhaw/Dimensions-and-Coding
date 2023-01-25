@@ -4,6 +4,7 @@ import LoginForm from "./LoginForm.js";
 import LogoutButton from "./LogoutButton.js";
 import Navbars from "./Navbars.js";
 import "./App.css";
+// import QuestionsDetails from './questions/index.js';
 import React from "react";
 import LandingPage from "./Landing";
 import "swiper/swiper-bundle.min.css";
@@ -18,10 +19,14 @@ function App() {
         <Navbars />
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/signup" element={<AccountForm />} />
-          <Route path="/logout" element={<LogoutButton />} />
-          <Route path="/createCharacterTest" element={<CharacterFormTwo />} />
+          <Route path="ground-7-rule">
+            <Route index element={<LandingPage />} />
+            <Route path="login" element={<LoginForm />} />
+            <Route path="signup" element={<AccountForm />} />
+            <Route path="logout" element={<LogoutButton />} />
+            <Route path="createCharacterTest" element={<CharacterFormTwo />} />
+            {/* <Route path="questions" element={<QuestionsDetails />} /> */}
+          </Route>
         </Routes>
       </BrowserRouter>
     </Provider>
