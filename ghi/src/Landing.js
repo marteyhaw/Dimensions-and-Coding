@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Swiper from "swiper/bundle";
 import { useEffect } from "react";
 // import CharacterDetailsTwo from "./CharacterDetailsRTK";
@@ -41,16 +40,6 @@ function LandingPage() {
             your coding skills with Dungeon and Coding?
           </p>
           <hr />
-          <Link to="/signup">
-            <button type="submit" className="btn btn-primary btn-lg">
-              Signup
-            </button>
-          </Link>
-          <Link to="/login">
-            <button type="submit" className="btn btn-primary btn-lg ms-5">
-              Login
-            </button>
-          </Link>
         </div>
       </div>
       <div className="testimonials paralax-mf bg-image">

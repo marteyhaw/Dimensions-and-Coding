@@ -27,6 +27,19 @@ function App() {
             <Route path="createCharacterTest" element={<CharacterFormTwo />} />
             {/* <Route path="questions" element={<QuestionsDetails />} /> */}
           </Route>
+          <Route
+            path="*"
+            element={
+              <div
+                className="container"
+                style={{ padding: "1rem", maxWidth: "250px" }}
+              >
+                <p className="w-2 alert alert-danger text-center">
+                  There's nothing here!
+                </p>
+              </div>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </Provider>

@@ -1,10 +1,10 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLogInMutation } from "./store/authApi";
-import { eventTargetSelector as target, preventDefault } from "./store/utils";
 import { updateField } from "./store/accountSlice";
 import Notification from "./Notifications";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -15,6 +15,19 @@ function LoginForm() {
       dispatch(updateField({ field: e.target.name, value: e.target.value })),
     [dispatch]
   );
+  const navigate = useNavigate();
+
+  const attemptSubmit = async (e) => {
+    e.preventDefault();
+    const email = username;
+    const response = await logIn({
+      email,
+      password,
+    });
+    if (response.data) {
+      navigate("/ground-7-rule/");
+    }
+  };
 
   return (
     <>
@@ -33,7 +46,7 @@ function LoginForm() {
             {error ? (
               <Notification type="danger">{error.data.detail}</Notification>
             ) : null}
-            <form method="POST" onSubmit={preventDefault(logIn, target)}>
+            <form method="POST" onSubmit={(e) => attemptSubmit(e)}>
               <div className="d-flex flex-row align-items-center mb-4 ">
                 <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                 <div className="form-outline flex-fill mb-0">
@@ -87,8 +100,8 @@ function LoginForm() {
             <div className="text-center">
               <button variant="body2">
                 {" "}
-                Not a member of our Kingdom?
-                <Link to="/signup">Register</Link>
+                Not a member of our Kingdom?{" "}
+                <Link to="/ground-7-rule/signup">Register now!</Link>
               </button>
             </div>
           </div>

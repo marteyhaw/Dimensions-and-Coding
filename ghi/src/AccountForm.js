@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSignUpMutation } from "./store/authApi";
-import { preventDefault } from "./store/utils";
 import { updateField } from "./store/accountSlice";
 import Notification from "./Notifications";
+import { useNavigate } from "react-router-dom";
 
 function AccountForm(props) {
   const dispatch = useDispatch();
@@ -16,6 +16,21 @@ function AccountForm(props) {
       dispatch(updateField({ field: e.target.name, value: e.target.value })),
     [dispatch]
   );
+  const navigate = useNavigate();
+
+  const attemptSubmit = async (e) => {
+    e.preventDefault();
+    const response = await signUp({
+      first_name,
+      last_name,
+      username,
+      email,
+      password,
+    });
+    if (response.data) {
+      navigate("/ground-7-rule/");
+    }
+  };
 
   return (
     <>
@@ -38,16 +53,7 @@ function AccountForm(props) {
             {error ? (
               <Notification type="danger">{error?.data?.detail}</Notification>
             ) : null}
-            <form
-              method="POST"
-              onSubmit={preventDefault(signUp, () => ({
-                first_name,
-                last_name,
-                username,
-                email,
-                password,
-              }))}
-            >
+            <form method="POST" onSubmit={(e) => attemptSubmit(e)}>
               <div className="d-flex flex-row align-items-center mb-4 ">
                 <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                 <div className="form-outline flex-fill mb-0">

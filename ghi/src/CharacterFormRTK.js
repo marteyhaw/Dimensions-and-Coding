@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useCreateCharacterMutation } from "./store/charApi";
 import { updateField } from "./store/charSlice";
 import { useNavigate } from "react-router-dom";
+import Notification from "./Notifications";
 
 function RadioButtonsGroup(props) {
   const dispatch = useDispatch();
@@ -134,7 +135,7 @@ function CharacterFormTwo(props) {
       dispatch(updateField({ field: e.target.name, value: e.target.value })),
     [dispatch]
   );
-  const [createCharacter] = useCreateCharacterMutation();
+  const [createCharacter, { error }] = useCreateCharacterMutation();
   const navigate = useNavigate();
 
   const prepSubmit = () => {
@@ -151,19 +152,29 @@ function CharacterFormTwo(props) {
     };
   };
 
-  const attemptSubmit = (e) => {
+  const attemptSubmit = async (e) => {
     e.preventDefault();
-    createCharacter(prepSubmit()).then(navigate("/ground-7-rule/"));
+    const response = await createCharacter(prepSubmit());
+    if (response.data) {
+      navigate("/ground-7-rule/");
+    }
   };
 
   return (
     <div className="row">
       <div className="offset-1 col-9">
         <div className="shadow p-4 mt-4">
+          {error ? (
+            <Notification type="danger">
+              {error.data.detail[0].msg === "value is not a valid integer"
+                ? "Pick a class"
+                : "An error occurred"}
+            </Notification>
+          ) : null}
           <h1 style={{ textAlign: "center" }}>Create a Character</h1>
           <form method="POST" onSubmit={(e) => attemptSubmit(e)}>
             <div>
-              <RadioButtonsGroup />
+              <RadioButtonsGroup required />
             </div>
             <div
               className="row row-cols-3 align-items-center"
@@ -174,6 +185,7 @@ function CharacterFormTwo(props) {
                 <h2>Character Name :</h2>
               </label>
               <input
+                required
                 value={name}
                 onChange={field}
                 name="name"
