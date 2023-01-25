@@ -22,6 +22,7 @@ class CharacterUpdate(BaseModel):
 class CharacterIn(BaseModel):
     name: str
     class_id: int
+    img_url: Optional[str]
 
 
 class CharacterOut(BaseModel):
@@ -41,13 +42,17 @@ class CharacterRepo:
 
     def create_character(
         self,
-        character: CharacterClass,
+        character: CharacterIn,
         user_id: int = 0,
-        img_url: str = url_1+url_2,
+        img_url: str = url_1 + url_2,
         quest_id: int = 1,
         health: int = 5,
         currency: int = 0,
     ) -> CharacterOut:
+
+        if hasattr(character, "img_url"):
+            img_url = character.img_url
+
         # try:
         with pool.connection() as conn:
             with conn.cursor() as db:
@@ -86,12 +91,11 @@ class CharacterRepo:
                     FROM class
                     WHERE id = %s;
                     """,
-                    [character.class_id]
+                    [character.class_id],
                 )
                 class_info_x = class_info.fetchone()
                 class_output = CharacterClass(
-                    id=class_info_x[0],
-                    name=class_info_x[1]
+                    id=class_info_x[0], name=class_info_x[1]
                 )
                 old_data = character.dict()
                 old_data["class_id"] = class_output
@@ -101,6 +105,7 @@ class CharacterRepo:
                 old_data["health"] = health
                 old_data["currency"] = currency
                 return CharacterOut(id=int(id), **old_data)
+
     # except Exception:
     #     return {"message": "error!"}
 
@@ -167,8 +172,8 @@ class CharacterRepo:
             img_url=record[3],
             quest_id=record[4],
             health=record[5],
-            currency=record[6]
-            )
+            currency=record[6],
+        )
 
     def record_to_character_out_update(self, record):
         return CharacterOut(
@@ -179,8 +184,8 @@ class CharacterRepo:
             img_url=record[4],
             quest_id=record[5],
             health=record[6],
-            currency=record[7]
-            )
+            currency=record[7],
+        )
 
     def update(
         self, character_id: int, character: CharacterUpdate

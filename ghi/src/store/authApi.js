@@ -14,7 +14,7 @@ export const authApiSlice = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Account", "Token"],
+  tagTypes: ["Account", "Token", "Character"],
   endpoints: (builder) => ({
     signUp: builder.mutation({
       query: (data) => ({

@@ -1,12 +1,23 @@
-import { useState } from "react";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-// import CharacterDetails from "./CharacterDetails";
+import { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useCreateCharacterMutation } from "./store/charApi";
+import { updateField } from "./store/charSlice";
+import { useNavigate } from "react-router-dom";
 
 function RadioButtonsGroup(props) {
+  const dispatch = useDispatch();
+  const { class_id } = useSelector((state) => state.character);
+  const field = useCallback(
+    (e) =>
+      dispatch(updateField({ field: e.target.name, value: e.target.value })),
+    [dispatch]
+  );
+
   return (
     <FormControl>
       <FormLabel
@@ -16,17 +27,25 @@ function RadioButtonsGroup(props) {
         Choose a Class
       </FormLabel>
       <RadioGroup
-        onChange={(e) => props.setClassSet(e.target.value)}
+        onChange={field}
+        value={class_id}
         aria-labelledby="demo-radio-buttons-group-label"
-        name="radio-buttons-group"
+        name="class_id"
+        // name="radio-buttons-group"
       >
         <div className="row row-cols-3 align-items-center">
           <div className="col-2" align="center">
-            <FormControlLabel value="1" control={<Radio />} label="Dog" />
+            <FormControlLabel
+              onClick={field}
+              value="1"
+              name="class_id"
+              control={<Radio />}
+              label="Dog"
+            />
           </div>
           <div className="col-4">
             <img
-              src={require("./img/001_Dog.JPG")}
+              src={require("./img/Dog.JPG")}
               style={{
                 height: "200px",
                 width: "300px",
@@ -38,7 +57,7 @@ function RadioButtonsGroup(props) {
           </div>
           <div className="col-4">
             <img
-              src={require("./img/002_Rabbit.JPG")}
+              src={require("./img/Rabbit.JPG")}
               style={{
                 height: "200px",
                 width: "300px",
@@ -50,7 +69,9 @@ function RadioButtonsGroup(props) {
           </div>
           <div className="col-2" align="center">
             <FormControlLabel
+              onClick={field}
               value="2"
+              name="class_id"
               control={<Radio />}
               label="Rabbit"
               labelPlacement="start"
@@ -59,11 +80,17 @@ function RadioButtonsGroup(props) {
         </div>
         <div className="row row-cols-3 align-items-center">
           <div className="col-2" align="center">
-            <FormControlLabel value="3" control={<Radio />} label="Owl" />
+            <FormControlLabel
+              onClick={field}
+              value="3"
+              name="class_id"
+              control={<Radio />}
+              label="Owl"
+            />
           </div>
           <div className="col-4">
             <img
-              src={require("./img/003_Owl.JPG")}
+              src={require("./img/Owl.JPG")}
               style={{
                 height: "200px",
                 width: "300px",
@@ -74,7 +101,7 @@ function RadioButtonsGroup(props) {
           </div>
           <div className="col-4" align="center">
             <img
-              src={require("./img/004_Penguin.JPG")}
+              src={require("./img/Penguin.JPG")}
               style={{
                 height: "200px",
                 width: "300px",
@@ -85,7 +112,9 @@ function RadioButtonsGroup(props) {
           </div>
           <div className="col-2">
             <FormControlLabel
+              onClick={field}
               value="4"
+              name="class_id"
               control={<Radio />}
               label="Penguin"
               labelPlacement="start"
@@ -97,48 +126,34 @@ function RadioButtonsGroup(props) {
   );
 }
 
-function CharacterForm(props) {
-  const [charName, setCharName] = useState("");
-  const [classSet, setClassSet] = useState("");
+function CharacterFormTwo(props) {
+  const dispatch = useDispatch();
+  const { name, class_id } = useSelector((state) => state.character);
+  const field = useCallback(
+    (e) =>
+      dispatch(updateField({ field: e.target.name, value: e.target.value })),
+    [dispatch]
+  );
+  const [createCharacter] = useCreateCharacterMutation();
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const data = { name: charName, class_id: classSet };
-    const charCreationURL = "http://localhost:8000/characters";
-    const fetchConfig = {
-      method: "post",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
+  const prepSubmit = () => {
+    const class_img = ["Dog.JPG", "Rabbit.JPG", "Owl.JPG", "Penguin.JPG"][
+      parseInt(class_id) - 1
+    ];
+    const obj = {
+      img_url: class_img,
     };
-    const response = await fetch(charCreationURL, fetchConfig);
-    const char_data = await response.json()
-    if (response.ok) {
-      console.log("character created");
-      const curr_char = char_data.id;
-      const img_list = [
-        "",
-        "https://i.imgur.com/SWVMGWA.jpg",
-        "https://i.imgur.com/7mQMRmi.jpg",
-        "https://i.imgur.com/OPeW1gt.jpg",
-        "https://i.imgur.com/3Pu2lhi.jpg",
-      ];
-      const img_change = { img_url: img_list[classSet] };
-      const imgUpdateURL = "http://localhost:8000/characters/character/"+curr_char;
-      const fetchConfigImg = {
-        method: "put",
-        body: JSON.stringify(img_change),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      const imgResponse = await fetch(imgUpdateURL, fetchConfigImg);
-      if (imgResponse.ok) {
-        console.log("image updated");
-        window.location.reload();
-      }
-    }
+    return {
+      name,
+      class_id,
+      ...obj,
+    };
+  };
+
+  const attemptSubmit = (e) => {
+    e.preventDefault();
+    createCharacter(prepSubmit()).then(navigate("/"));
   };
 
   return (
@@ -146,9 +161,9 @@ function CharacterForm(props) {
       <div className="offset-1 col-9">
         <div className="shadow p-4 mt-4">
           <h1 style={{ textAlign: "center" }}>Create a Character</h1>
-          <form onSubmit={handleSubmit}>
+          <form method="POST" onSubmit={(e) => attemptSubmit(e)}>
             <div>
-              <RadioButtonsGroup setClassSet={setClassSet} />
+              <RadioButtonsGroup />
             </div>
             <div
               className="row row-cols-3 align-items-center"
@@ -159,8 +174,9 @@ function CharacterForm(props) {
                 <h2>Character Name :</h2>
               </label>
               <input
-                value={charName}
-                onChange={(e) => setCharName(e.target.value)}
+                value={name}
+                onChange={field}
+                name="name"
                 className="col-7 text-center"
                 id="characterName"
                 placeholder="Enter Character Name"
@@ -178,4 +194,4 @@ function CharacterForm(props) {
   );
 }
 
-export default CharacterForm;
+export default CharacterFormTwo;

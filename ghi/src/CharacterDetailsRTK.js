@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
-import * as React from 'react';
-import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
+import { useState } from "react";
+import * as React from "react";
+import Drawer from "@mui/material/Drawer";
+import Button from "@mui/material/Button";
+import { useGetCharacterDetailsQuery } from "./store/charApi";
 
-
-function CharacterDetails(props) {
-  const [charDetails, setCharDetails] = useState([]);
+function CharacterDetailsTwo(props) {
+  const { data: charDetails } = useGetCharacterDetailsQuery(1);
   const [state, setState] = useState({
     top: false,
     left: false,
@@ -23,20 +23,6 @@ function CharacterDetails(props) {
 
     setState({ ...state, [anchor]: open });
   };
-
-  useEffect(() => {
-    async function getCharDetails() {
-      const url = "http://localhost:8000/inventories/31";
-      const response = await fetch(url);
-      if (response.ok) {
-        const data = await response.json();
-        setCharDetails(data);
-        console.log(data)
-
-      }
-    }
-    getCharDetails();
-  }, [setCharDetails]);
 
   return (
     <div>
@@ -66,7 +52,7 @@ function CharacterDetails(props) {
                           height: "200px",
                           width: "300px",
                         }}
-                        src={charDetails.img_url}
+                        src={require(`./img/${charDetails.img_url}`)}
                         className="img-thumbnail"
                         alt="class-img"
                       />
@@ -119,4 +105,4 @@ function CharacterDetails(props) {
   );
 }
 
-export default CharacterDetails;
+export default CharacterDetailsTwo;

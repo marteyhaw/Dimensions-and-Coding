@@ -1,6 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import CharacterForm from "./CharacterForm.js";
-import CharacterDetails from "./CharacterDetails.js";
 import AccountForm from "./AccountForm.js";
 import LoginForm from "./LoginForm.js";
 import LogoutButton from "./LogoutButton.js";
@@ -11,6 +9,7 @@ import LandingPage from "./Landing";
 import "swiper/swiper-bundle.min.css";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+import CharacterFormTwo from "./CharacterFormRTK";
 
 function App() {
   return (
@@ -22,9 +21,7 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signup" element={<AccountForm />} />
           <Route path="/logout" element={<LogoutButton />} />
-
-          <Route path="/characterDetails" element={<CharacterDetails />} />
-          <Route path="/createCharacter" element={<CharacterForm />} />
+          <Route path="/createCharacterTest" element={<CharacterFormTwo />} />
         </Routes>
       </BrowserRouter>
     </Provider>

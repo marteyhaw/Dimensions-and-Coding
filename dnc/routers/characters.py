@@ -6,7 +6,7 @@ from queries.characters import (
     CharacterOut,
     CharacterUpdate,
 )
-
+from authenticator import authenticator
 
 router = APIRouter()
 
@@ -15,7 +15,8 @@ router = APIRouter()
 def character_creation(
     character: CharacterIn,
     response: Response,
-    repo: CharacterRepo = Depends()
+    repo: CharacterRepo = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> CharacterOut:
     return repo.create_character(character)
 
@@ -23,6 +24,7 @@ def character_creation(
 @router.get("/classes")
 def get_all_classes(
     repo: CharacterRepo = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> CharacterOut:
     return repo.get_classes()
 
@@ -31,6 +33,7 @@ def get_all_classes(
 def get_user_characters(
     user_id: int,
     repo: CharacterRepo = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> CharacterOut:
     return repo.get_characters_by_userid(user_id)
 
@@ -39,6 +42,7 @@ def get_user_characters(
 def get_character(
     character_id: int,
     repo: CharacterRepo = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> CharacterOut:
     return repo.get_character_by_characterid(character_id)
 
@@ -48,6 +52,7 @@ def update_character(
     character_id: int,
     character: CharacterUpdate,
     repo: CharacterRepo = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> CharacterOut:
     return repo.update(character_id, character)
 
@@ -56,5 +61,6 @@ def update_character(
 def delete_character(
     character_id: int,
     repo: CharacterRepo = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> CharacterOut:
     return repo.delete(character_id)
