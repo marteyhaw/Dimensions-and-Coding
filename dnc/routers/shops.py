@@ -6,7 +6,7 @@ from fastapi import (
 )
 from typing import Union
 from queries.shops import ShopItemsRepository, ShopItemsForSale, HttpError
-
+from authenticator import authenticator
 
 router = APIRouter()
 
@@ -15,7 +15,11 @@ router = APIRouter()
     "/shops/{shop_id}",
     response_model=Union[ShopItemsForSale, HttpError],
 )
-def get_shop_items(shop_id: int, repo: ShopItemsRepository = Depends()):
+def get_shop_items(
+    shop_id: int,
+    repo: ShopItemsRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
     try:
         shop_items = repo.get_items_for_sale(shop_id)
     except Exception:

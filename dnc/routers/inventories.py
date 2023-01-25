@@ -11,7 +11,7 @@ from queries.inventories import (
     InventoriesRepository,
     CharacterDetails,
 )
-
+from authenticator import authenticator
 
 router = APIRouter()
 
@@ -24,6 +24,7 @@ def add_item_to_inventory(
     character_id: int,
     item_id: int,
     repo: InventoriesRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     try:
         character_inventory = repo.purchase_item(item_id, character_id)
@@ -39,6 +40,7 @@ def add_item_to_inventory(
 def get_character_details(
     character_id: int,
     repo: InventoriesRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> CharacterDetails:
     try:
         character_details = repo.get_character_details(character_id)
