@@ -28,7 +28,7 @@ function AccountForm(props) {
       password,
     });
     if (response.data) {
-      navigate("/ground-7-rule/");
+      navigate("/ground-7-rule/createCharacterTest");
     }
   };
 

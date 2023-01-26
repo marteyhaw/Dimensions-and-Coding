@@ -9,6 +9,7 @@ import { useCreateCharacterMutation } from "./store/charApi";
 import { updateField } from "./store/charSlice";
 import { useNavigate } from "react-router-dom";
 import Notification from "./Notifications";
+import { useGetTokenQuery } from "./store/authApi";
 
 function RadioButtonsGroup(props) {
   const dispatch = useDispatch();
@@ -128,6 +129,7 @@ function RadioButtonsGroup(props) {
 }
 
 function CharacterFormTwo(props) {
+  const { data: token } = useGetTokenQuery();
   const dispatch = useDispatch();
   const { name, class_id } = useSelector((state) => state.character);
   const field = useCallback(
@@ -144,6 +146,7 @@ function CharacterFormTwo(props) {
     ];
     const obj = {
       img_url: class_img,
+      user_id: token.user.id,
     };
     return {
       name,
@@ -156,7 +159,7 @@ function CharacterFormTwo(props) {
     e.preventDefault();
     const response = await createCharacter(prepSubmit());
     if (response.data) {
-      navigate("/ground-7-rule/");
+      navigate("/ground-7-rule/campground");
     }
   };
 

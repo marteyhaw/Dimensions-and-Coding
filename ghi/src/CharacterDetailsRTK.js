@@ -3,10 +3,12 @@ import * as React from "react";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 import { useGetCharacterDetailsQuery } from "./store/charApi";
+import { useSelector } from "react-redux";
 
 function CharacterDetailsTwo(props) {
   const { token } = props;
-  const { data: charDetails } = useGetCharacterDetailsQuery(1);
+  const { active_character } = useSelector((state) => state.character);
+  const { data: charDetails } = useGetCharacterDetailsQuery(active_character);
   const [state, setState] = useState({
     top: false,
     left: false,
@@ -14,7 +16,9 @@ function CharacterDetailsTwo(props) {
     right: false,
   });
 
-  useEffect(() => {console.log(token)})
+  useEffect(() => {
+    console.log(token);
+  });
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (

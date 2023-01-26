@@ -21,6 +21,7 @@ class CharacterUpdate(BaseModel):
 
 class CharacterIn(BaseModel):
     name: str
+    user_id: int
     class_id: int
     img_url: Optional[str]
 
@@ -74,7 +75,7 @@ class CharacterRepo:
                         RETURNING id;
                         """,
                     [
-                        user_id,
+                        character.user_id,
                         character.name,
                         character.class_id,
                         img_url,

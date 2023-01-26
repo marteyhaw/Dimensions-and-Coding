@@ -11,6 +11,7 @@ import "swiper/swiper-bundle.min.css";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import CharacterFormTwo from "./CharacterFormRTK";
+import CharacterSelect from "./CharacterSelectPage.js";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="signup" element={<AccountForm />} />
             <Route path="logout" element={<LogoutButton />} />
             <Route path="createCharacterTest" element={<CharacterFormTwo />} />
+            <Route path="selectCharacter" element={<CharacterSelect />} />
             {/* <Route path="questions" element={<QuestionsDetails />} /> */}
           </Route>
           <Route

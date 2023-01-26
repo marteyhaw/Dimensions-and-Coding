@@ -1,15 +1,21 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLogInMutation } from "./store/authApi";
 import { updateField } from "./store/accountSlice";
 import Notification from "./Notifications";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useGetCharactersListQuery } from "./store/charApi";
+import { useGetTokenQuery } from "./store/authApi";
 
 function LoginForm() {
   const dispatch = useDispatch();
   const { username, password } = useSelector((state) => state.account);
   const [logIn, { error, isLoading: logInLoading }] = useLogInMutation();
+  const { data: token, refetch: refetchToken } = useGetTokenQuery();
+  const { data: charList, refetch: refetchList } = useGetCharactersListQuery(
+    token?.user.id
+  );
   const field = useCallback(
     (e) =>
       dispatch(updateField({ field: e.target.name, value: e.target.value })),
@@ -25,9 +31,33 @@ function LoginForm() {
       password,
     });
     if (response.data) {
-      navigate("/ground-7-rule/");
+      await refetchToken();
     }
   };
+
+  useEffect(() => {
+    const afterSubmit = async () => {
+      if (token) {
+        await refetchList();
+      }
+    };
+    afterSubmit();
+  }, [token, refetchList]);
+
+  useEffect(() => {
+    const afterTokenRefetching = async () => {
+      if (charList) {
+        let path;
+        if (charList.length === 0) {
+          path = "/ground-7-rule/createCharacterTest";
+        } else {
+          path = "/ground-7-rule/selectCharacter";
+        }
+        navigate(path);
+      }
+    };
+    afterTokenRefetching();
+  }, [charList, navigate]);
 
   return (
     <>

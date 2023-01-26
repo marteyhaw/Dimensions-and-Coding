@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   name: "",
   class_id: "",
+  active_character: "",
 };
 
 export const charSlice = createSlice({
