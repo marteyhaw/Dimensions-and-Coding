@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useGetCharactersListQuery } from "./store/charApi";
 import { useGetTokenQuery } from "./store/authApi";
+import { useState } from "react";
+import { Modal } from "react-bootstrap";
 
 function LoginForm() {
   const dispatch = useDispatch();

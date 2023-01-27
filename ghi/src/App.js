@@ -17,6 +17,7 @@ import MapUI from "./Maps/MapUI.js";
 // import { useGetTokenQuery } from "./store/authApi";
 
 import DashBoard from "./Dashboard.js";
+import CharacterDetailsPage from "./CharacterDetailsPage.js";
 
 function App() {
   // const { data: token, isLoading: tokenLoading } = useGetTokenQuery();
@@ -39,6 +40,7 @@ function App() {
             <Route path="dashboard" element={<DashBoard />} />
             <Route path="createCharacterTest" element={<CharacterFormTwo />} />
             <Route path="selectCharacter" element={<CharacterSelect />} />
+            <Route path="characterDetails" element={<CharacterDetailsPage />} />
             <Route path="map" element={<MapUI />} />
             {/* <Route path="questions" element={<QuestionsDetails />} /> */}
           </Route>

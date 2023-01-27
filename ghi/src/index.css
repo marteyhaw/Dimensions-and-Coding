@@ -29,6 +29,27 @@ html {
 }
 
 /* set background image per page */
+.img-thumbnail{
+  background: rgb(130,148,200);
+background: linear-gradient(256deg, rgba(130,148,200,1) 0%, rgba(175,190,221,1) 12%, rgba(202,212,233,1) 24%, rgba(183,198,232,1) 36%, rgba(153,174,217,1) 48%, rgba(184,202,241,1) 60%, rgba(190,216,242,1) 72%, rgba(220,241,253,1) 84%, rgba(197,222,243,1) 100%);
+  border: black
+}
+
+.form-bg{
+  background-color: rgba(95, 94, 94, 0.5) !important;
+}
+.character_creation-bg{
+background: url(img/character_creation.png) no-repeat center center fixed;
+background-size: cover;
+height: 100vh;
+opacity: 1;
+}
+.character-select-bg{
+background: url(img/character_select.png) no-repeat center center fixed;
+background-size: cover;
+height: 100vh;
+opacity: 1;
+}
 .home-bg {
   background: url(img/Shah.png) no-repeat center center fixed;
   background-size: cover;

@@ -101,7 +101,7 @@ function Navbars(props) {
                   ""
                 )}
               </NavLink>
-              <NavLink className="navbar-brand" to="/ground-7-rule/character">
+              <NavLink className="navbar-brand" to="/ground-7-rule/selectCharacter">
                 {tokenLoading ? (
                   "Loading..."
                 ) : token ? (

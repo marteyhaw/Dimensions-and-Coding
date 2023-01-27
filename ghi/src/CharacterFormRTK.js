@@ -10,6 +10,7 @@ import { updateField } from "./store/charSlice";
 import { useNavigate } from "react-router-dom";
 import Notification from "./Notifications";
 import { useGetTokenQuery } from "./store/authApi";
+import { blue } from "@mui/material/colors";
 
 function RadioButtonsGroup(props) {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ function RadioButtonsGroup(props) {
   return (
     <FormControl>
       <FormLabel
+        className="text-white"
         id="demo-radio-buttons-group-label"
         style={{ textAlign: "center" }}
       >
@@ -38,15 +40,26 @@ function RadioButtonsGroup(props) {
         <div className="row row-cols-3 align-items-center">
           <div className="col-2" align="center">
             <FormControlLabel
+              className="text-white"
               onClick={field}
               value="1"
               name="class_id"
-              control={<Radio />}
+              control={
+                <Radio
+                  sx={{
+                    color: blue[800],
+                    "&.Mui-checked": {
+                      color: blue[600],
+                    },
+                  }}
+                />
+              }
               label="Dog"
             />
           </div>
           <div className="col-4">
             <img
+              className="img-thumbnail"
               src={require("./img/Dog.JPG")}
               style={{
                 height: "200px",
@@ -59,6 +72,7 @@ function RadioButtonsGroup(props) {
           </div>
           <div className="col-4">
             <img
+              className="img-thumbnail"
               src={require("./img/Rabbit.JPG")}
               style={{
                 height: "200px",
@@ -71,10 +85,20 @@ function RadioButtonsGroup(props) {
           </div>
           <div className="col-2" align="center">
             <FormControlLabel
+              className="text-white"
               onClick={field}
               value="2"
               name="class_id"
-              control={<Radio />}
+              control={
+                <Radio
+                  sx={{
+                    color: blue[800],
+                    "&.Mui-checked": {
+                      color: blue[600],
+                    },
+                  }}
+                />
+              }
               label="Rabbit"
               labelPlacement="start"
             />
@@ -83,15 +107,26 @@ function RadioButtonsGroup(props) {
         <div className="row row-cols-3 align-items-center">
           <div className="col-2" align="center">
             <FormControlLabel
+              className="text-white"
               onClick={field}
               value="3"
               name="class_id"
-              control={<Radio />}
+              control={
+                <Radio
+                  sx={{
+                    color: blue[800],
+                    "&.Mui-checked": {
+                      color: blue[600],
+                    },
+                  }}
+                />
+              }
               label="Owl"
             />
           </div>
           <div className="col-4">
             <img
+              className="img-thumbnail"
               src={require("./img/Owl.JPG")}
               style={{
                 height: "200px",
@@ -103,6 +138,7 @@ function RadioButtonsGroup(props) {
           </div>
           <div className="col-4" align="center">
             <img
+              className="img-thumbnail"
               src={require("./img/Penguin.JPG")}
               style={{
                 height: "200px",
@@ -114,10 +150,20 @@ function RadioButtonsGroup(props) {
           </div>
           <div className="col-2">
             <FormControlLabel
+              className="text-white"
               onClick={field}
               value="4"
               name="class_id"
-              control={<Radio />}
+              control={
+                <Radio
+                  sx={{
+                    color: blue[800],
+                    "&.Mui-checked": {
+                      color: blue[600],
+                    },
+                  }}
+                />
+              }
               label="Penguin"
               labelPlacement="start"
             />
@@ -159,50 +205,56 @@ function CharacterFormTwo(props) {
     e.preventDefault();
     const response = await createCharacter(prepSubmit());
     if (response.data) {
-      navigate("/ground-7-rule/campground");
+      navigate("/ground-7-rule/characterSelect");
     }
   };
 
   return (
-    <div className="row">
-      <div className="offset-1 col-9">
-        <div className="shadow p-4 mt-4">
-          {error ? (
-            <Notification type="danger">
-              {error.data.detail[0].msg === "value is not a valid integer"
-                ? "Pick a class"
-                : "An error occurred"}
-            </Notification>
-          ) : null}
-          <h1 style={{ textAlign: "center" }}>Create a Character</h1>
-          <form method="POST" onSubmit={(e) => attemptSubmit(e)}>
-            <div>
-              <RadioButtonsGroup required />
+    <div className="character_creation-bg">
+      <div className="row">
+        <div className="offset-1 col-10">
+          <div className="form-bg">
+            <div className="shadow p-4 mt-4">
+              {error ? (
+                <Notification type="danger">
+                  {error.data.detail[0].msg === "value is not a valid integer"
+                    ? "Pick a class"
+                    : "An error occurred"}
+                </Notification>
+              ) : null}
+              <h1 className="text-white" style={{ textAlign: "center" }}>
+                Create a Character
+              </h1>
+              <form method="POST" onSubmit={(e) => attemptSubmit(e)}>
+                <div style={{ textAlign: "center" }}>
+                  <RadioButtonsGroup required />
+                </div>
+                <div
+                  className="row row-cols-3 align-items-center"
+                  align="center"
+                  style={{ paddingTop: "40px" }}
+                >
+                  <label htmlFor="characterName">
+                    <h2 className="text-white">Character Name :</h2>
+                  </label>
+                  <input
+                    required
+                    value={name}
+                    onChange={field}
+                    name="name"
+                    className="col-7 text-center"
+                    id="characterName"
+                    placeholder="Enter Character Name"
+                  />
+                </div>
+                <div className="col text-center" style={{ paddingTop: "40px" }}>
+                  <button type="submit" className="btn btn-primary btn-lg">
+                    Submit
+                  </button>
+                </div>
+              </form>
             </div>
-            <div
-              className="row row-cols-3 align-items-center"
-              align="center"
-              style={{ paddingTop: "40px" }}
-            >
-              <label htmlFor="characterName">
-                <h2>Character Name :</h2>
-              </label>
-              <input
-                required
-                value={name}
-                onChange={field}
-                name="name"
-                className="col-7 text-center"
-                id="characterName"
-                placeholder="Enter Character Name"
-              />
-            </div>
-            <div className="col text-center" style={{ paddingTop: "40px" }}>
-              <button type="submit" className="btn btn-primary btn-lg">
-                Submit
-              </button>
-            </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>

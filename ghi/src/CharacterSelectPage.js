@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateField } from "./store/charSlice";
 import { useNavigate } from "react-router-dom";
 import { useGetCharacterDetailsQuery } from "./store/charApi";
+import { blue } from "@mui/material/colors";
 
 function CharacterSelect(props) {
   const dispatch = useDispatch();
@@ -38,6 +39,10 @@ function CharacterSelect(props) {
     navigate("/ground-7-rule/campground");
   };
 
+  const newChar = (e) => {
+    e.preventDefault();
+    navigate("/ground-7-rule/createCharacterTest");
+  };
   return (
     <>
       {tokenLoading ? (
@@ -47,39 +52,77 @@ function CharacterSelect(props) {
           {listLoading ? (
             "Loading..."
           ) : charList ? (
-            <div className="row">
-              <div className="offset-1 col-9">
-                <div className="shadow p-4 mt-4">
-                  <h1 style={{ textAlign: "center" }}>Select Your Character</h1>
-                  <form onSubmit={(e) => attemptSubmit(e)}>
-                    <FormControl>
-                      <FormLabel id="demo-radio-buttons-group-label">
-                        Characters
-                      </FormLabel>
-                      <RadioGroup
-                        aria-labelledby="demo-radio-buttons-group-label"
-                        name="active_character"
-                        onChange={field}
+            <div className="character-select-bg">
+              <div className="row">
+                <div className="offset-1 col-10">
+                  <div className="form-bg">
+                    <div className="shadow p-4 mt-4">
+                      <h1
+                        className="text-white"
+                        style={{ textAlign: "center" }}
                       >
-                        {charList.map((char, index) => (
-                          <FormControlLabel
-                            key={index}
-                            value={char.id}
-                            control={<Radio />}
-                            label={char.name}
-                          />
-                        ))}
-                      </RadioGroup>
-                    </FormControl>
-                    <div
-                      className="col text-center"
-                      style={{ paddingTop: "40px" }}
-                    >
-                      <button type="submit" className="btn btn-primary btn-lg">
-                        Submit
-                      </button>
+                        Select Your Character
+                      </h1>
+                      <form onSubmit={(e) => attemptSubmit(e)}>
+                        <FormControl>
+                          <FormLabel id="demo-radio-buttons-group-label"></FormLabel>
+                          <RadioGroup
+                            aria-labelledby="demo-radio-buttons-group-label"
+                            name="active_character"
+                            onChange={field}
+                          >
+                            <div className="row row-cols-3 align-items-center">
+                              {charList.map((char, index) => (
+                                <div className="col-4" align="center" key={index}>
+                                  <img
+                                    style={{
+                                      height: "200px",
+                                      width: "300px",
+                                    }}
+                                    src={require(`./img/${char.img_url}`)}
+                                    className="img-thumbnail"
+                                    alt="class-img"
+                                  />
+                                  <FormControlLabel
+                                    className="text-white"
+                                    key={index}
+                                    value={char.id}
+                                    control={
+                                      <Radio
+                                        sx={{
+                                          color: blue[800],
+                                          "&.Mui-checked": {
+                                            color: blue[600],
+                                          },
+                                        }}
+                                      />
+                                    }
+                                    label={char.name}
+                                  />
+                                </div>
+                              ))}
+                            </div>
+                          </RadioGroup>
+                        </FormControl>
+                        <div
+                          className="col text-center"
+                          style={{ paddingTop: "40px" }}
+                        >
+                          <button
+                            type="submit"
+                            className="btn btn-primary btn-lg"
+                          >
+                            Enter
+                          </button>
+                          <div style={{ textAlign: "right" }}>
+                            <button onClick={(e) => newChar(e)}>
+                              New Character
+                            </button>
+                          </div>
+                        </div>
+                      </form>
                     </div>
-                  </form>
+                  </div>
                 </div>
               </div>
             </div>
