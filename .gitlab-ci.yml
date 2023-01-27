@@ -13,15 +13,25 @@ lint-test-job:
     - flake8 user
 
 # Run the unit tests
-# api-unit-test-job:
-#   image: python:3-bullseye
-#   stage: test
-#   needs:
-#     - lint-test-job
-#   script:
-#     - cd sample_service
-#     - pip install -r requirements.txt
-#     - python -m pytest
+dnc-api-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  needs:
+    - lint-test-job
+  script:
+    - cd dnc
+    - pip install -r requirements.txt
+    - python -m pytest
+
+user-api-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  needs:
+    - lint-test-job
+  script:
+    - cd user
+    - pip install -r requirements.txt
+    - python -m pytest
 
 build-dnc-api:
   image: docker:19.03.1
