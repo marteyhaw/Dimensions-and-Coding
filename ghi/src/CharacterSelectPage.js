@@ -7,9 +7,10 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateField } from "./store/charSlice";
 import { useNavigate } from "react-router-dom";
+import { useGetCharacterDetailsQuery } from "./store/charApi";
 
 function CharacterSelect(props) {
   const dispatch = useDispatch();
@@ -25,8 +26,15 @@ function CharacterSelect(props) {
 
   const navigate = useNavigate();
 
-  const attemptSubmit = (e) => {
+  const { active_character } = useSelector((state) => state.character);
+  const { data: character_details } =
+    useGetCharacterDetailsQuery(active_character);
+
+  const attemptSubmit = async (e) => {
     e.preventDefault();
+    dispatch(
+      updateField({ field: "stored_char_details", value: character_details })
+    );
     navigate("/ground-7-rule/campground");
   };
 

@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  name: "",
-  class_id: "",
-  active_character: "",
-  stored_char_details: "",
+  question: "",
+  option_1: "",
+  option_2: "",
+  option_3: "",
 };
 
-export const charSlice = createSlice({
-  name: "character",
+export const quesSlice = createSlice({
+  name: "question",
   initialState,
   reducers: {
     updateField: (state, action) => {
@@ -23,4 +23,4 @@ export const charSlice = createSlice({
   },
 });
 
-export const { clearForm, updateField, showModal } = charSlice.actions;
+export const { clearForm, updateField, showModal } = quesSlice.actions;
