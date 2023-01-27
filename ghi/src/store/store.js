@@ -6,6 +6,10 @@ import { charApiSlice } from "./charApi";
 import { charSlice } from "./charSlice";
 import { mapsApiSlice } from "./mapsApi";
 import { mapSlice } from "./mapSlice";
+import { shopApiSlice } from "./shopApi";
+import { shopSlice } from "./shopSlice";
+import { quesApiSlice } from "./quesApi";
+import { quesSlice } from "./quesSlice";
 
 export const store = configureStore({
   reducer: {
@@ -15,12 +19,18 @@ export const store = configureStore({
     [mapSlice.name]: mapSlice.reducer,
     [charApiSlice.reducerPath]: charApiSlice.reducer,
     [charSlice.name]: charSlice.reducer,
+    [shopApiSlice.reducerPath]: shopApiSlice.reducer,
+    [shopSlice.name]: shopSlice.reducer,
+    [quesApiSlice.reducerPath]: quesApiSlice.reducer,
+    [quesSlice.name]: quesSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(authApiSlice.middleware)
       .concat(charApiSlice.middleware)
-      .concat(mapsApiSlice.middleware),
+      .concat(mapsApiSlice.middleware)
+      .concat(quesApiSlice.middleware)
+      .concat(shopApiSlice.middleware),
 });
 
 setupListeners(store.dispatch);

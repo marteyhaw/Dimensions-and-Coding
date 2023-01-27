@@ -3,7 +3,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useCreateCharacterMutation } from "./store/charApi";
 import { updateField } from "./store/charSlice";
@@ -174,8 +174,19 @@ function RadioButtonsGroup(props) {
   );
 }
 
-function CharacterFormTwo(props) {
-  const { data: token } = useGetTokenQuery();
+function CharacterForm(props) {
+  // Start of Token and Active character check
+  const { data: token, isLoading: tokenLoading } = useGetTokenQuery();
+  const navigate = useNavigate();
+
+  const { active_character } = useSelector((state) => state.character);
+  useEffect(() => {
+    if (!token && !tokenLoading) {
+      navigate("/ground-7-rule/login");
+    }
+  }, [token, tokenLoading, active_character, navigate]);
+  // End of Token and Active character check
+
   const dispatch = useDispatch();
   const { name, class_id } = useSelector((state) => state.character);
   const field = useCallback(
@@ -184,7 +195,6 @@ function CharacterFormTwo(props) {
     [dispatch]
   );
   const [createCharacter, { error }] = useCreateCharacterMutation();
-  const navigate = useNavigate();
 
   const prepSubmit = () => {
     const class_img = ["Dog.JPG", "Rabbit.JPG", "Owl.JPG", "Penguin.JPG"][
@@ -261,4 +271,4 @@ function CharacterFormTwo(props) {
   );
 }
 
-export default CharacterFormTwo;
+export default CharacterForm;

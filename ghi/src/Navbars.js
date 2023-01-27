@@ -3,6 +3,7 @@ import { useGetTokenQuery } from "./store/authApi";
 import LogoutButton from "./LogoutButton";
 import LoginButton from "./LoginButton";
 import { NavLink } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function Navbars(props) {
   const { data: token, isLoading: tokenLoading } = useGetTokenQuery();
@@ -27,9 +28,9 @@ function Navbars(props) {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto"></Nav>
-            <NavLink className="navbar-brand" to="/ground-7-rule/dashboard">
+            <NavLink className="navbar-brand" to="/ground-7-rule/campground">
               {tokenLoading ? (
-                "Loading..."
+                <CircularProgress color="warning" />
               ) : token ? (
                 <div className="text-center text-warning">
                   <img
@@ -46,9 +47,12 @@ function Navbars(props) {
               )}
             </NavLink>
             <Nav className="me-auto">
-              <NavLink className="navbar-brand" to="/ground-7-rule/inventory">
+              <NavLink
+                className="navbar-brand"
+                to="/ground-7-rule/characterDetails"
+              >
                 {tokenLoading ? (
-                  "Loading..."
+                  <CircularProgress color="warning" />
                 ) : token ? (
                   <div className="text-center text-warning">
                     <img
@@ -58,7 +62,7 @@ function Navbars(props) {
                       height="64"
                       className="d-inline-block align-top"
                     />
-                    <div>SHOP</div>
+                    <div>INVENTORY</div>
                   </div>
                 ) : (
                   ""
@@ -66,7 +70,7 @@ function Navbars(props) {
               </NavLink>
               <NavLink className="navbar-brand" to="/ground-7-rule/map">
                 {tokenLoading ? (
-                  "Loading..."
+                  <CircularProgress color="warning" />
                 ) : token ? (
                   <div className="text-center text-warning">
                     <img
@@ -82,9 +86,9 @@ function Navbars(props) {
                   ""
                 )}
               </NavLink>
-              <NavLink className="navbar-brand" to="/ground-7-rule/currency">
+              <NavLink className="navbar-brand" to="/ground-7-rule/shop">
                 {tokenLoading ? (
-                  "Loading..."
+                  <CircularProgress color="warning" />
                 ) : token ? (
                   <div className="text-center text-warning">
                     <img
@@ -101,9 +105,12 @@ function Navbars(props) {
                   ""
                 )}
               </NavLink>
-              <NavLink className="navbar-brand" to="/ground-7-rule/selectCharacter">
+              <NavLink
+                className="navbar-brand"
+                to="/ground-7-rule/selectCharacter"
+              >
                 {tokenLoading ? (
-                  "Loading..."
+                  <CircularProgress color="warning" />
                 ) : token ? (
                   <div className="text-center text-warning">
                     <img
@@ -123,7 +130,7 @@ function Navbars(props) {
             <Nav>
               <div className="navbar-item">
                 {tokenLoading ? (
-                  "Loading..."
+                  <CircularProgress color="warning" />
                 ) : token ? (
                   <LogoutButton />
                 ) : (

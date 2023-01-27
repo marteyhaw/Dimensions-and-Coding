@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useGetTokenQuery } from "./store/authApi";
 
-export default function DashBoard(props) {
+export default function Campground(props) {
+  // Start of Token and Active character check
+  const { data: token, isLoading: tokenLoading } = useGetTokenQuery();
   const navigate = useNavigate();
+
+  const { active_character } = useSelector((state) => state.character);
+  useEffect(() => {
+    if (!token && !tokenLoading) {
+      navigate("/ground-7-rule/login");
+    }
+    if (token && !active_character) {
+      navigate("/ground-7-rule/selectCharacter");
+    }
+  }, [token, tokenLoading, active_character, navigate]);
+  // End of Token and Active character check
 
   return (
     <>
@@ -25,16 +40,16 @@ export default function DashBoard(props) {
                 <button
                   type="button"
                   onClick={() => {
-                    navigate("/characterDetails");
+                    navigate("/ground-7-rule/map");
                   }}
                   className="btn btn-dark me-4"
                 >
-                  Character Details
+                  Map
                 </button>
                 <button
                   type="button"
                   onClick={() => {
-                    navigate("/provider/update");
+                    navigate("/ground-7-rule/selectCharacter");
                   }}
                   className="btn btn-dark me-4"
                 >
@@ -45,7 +60,7 @@ export default function DashBoard(props) {
             <button
               type="button"
               onClick={() => {
-                navigate("/provider/update");
+                navigate("/ground-7-rule/characterDetails");
               }}
               className="btn btn-dark me-4"
             >
@@ -54,11 +69,11 @@ export default function DashBoard(props) {
             <button
               type="button"
               onClick={() => {
-                navigate("/provider/update");
+                navigate("/ground-7-rule/shop");
               }}
               className="btn btn-dark me-4"
             >
-              Quest
+              Shop
             </button>
           </div>
         </div>

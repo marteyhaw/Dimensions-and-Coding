@@ -96,8 +96,21 @@ class AnswersRepo:
                         [character_id],
                     )
                     current_currency, current_quest = get_currency.fetchone()
-                    new_quest = current_quest + 1
+
+                    get_highest_quest_id = db.execute(
+                        """
+                            SELECT COUNT(id)
+                            FROM quests;
+                            """,
+                    )
+                    highest_quest_id = get_highest_quest_id.fetchone()[0]
+
+                    if current_quest == highest_quest_id:
+                        new_quest = highest_quest_id
+                    else:
+                        new_quest = current_quest + 1
                     new_currency = current_currency + 1
+
                     db.execute(
                         """
                             UPDATE characters
@@ -136,6 +149,6 @@ class AnswersRepo:
                             SET health = %s
                             WHERE id = %s
                             """,
-                            [current_health, character_id],
+                            [new_health, character_id],
                         )
                     return False

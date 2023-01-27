@@ -1,30 +1,23 @@
+import "./App.css";
+import "swiper/swiper-bundle.min.css";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 import AccountForm from "./AccountForm.js";
 import LoginForm from "./LoginForm.js";
 import LogoutButton from "./LogoutButton.js";
 import Navbars from "./Navbars.js";
-import "./App.css";
-// import QuestionsDetails from './questions/index.js';
-import React from "react";
 import LandingPage from "./Landing";
-import "swiper/swiper-bundle.min.css";
-import { Provider } from "react-redux";
-import { store } from "./store/store";
-import CharacterFormTwo from "./CharacterFormRTK";
+import CharacterForm from "./CharacterFormRTK";
 import CharacterSelect from "./CharacterSelectPage.js";
 import MapUI from "./Maps/MapUI.js";
-
-// import { useGetTokenQuery } from "./store/authApi";
-
-import DashBoard from "./Dashboard.js";
+import QuestionsDetails from "./questions/index.js";
+import Campground from "./Campground.js";
 import CharacterDetailsPage from "./CharacterDetailsPage.js";
+import Shop from "./Shop.js";
 
 function App() {
-  // const { data: token, isLoading: tokenLoading } = useGetTokenQuery();
-  // if (tokenLoading) {
-  //   return <progress className="progress is-primary" max="100"></progress>;
-  // }
-
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -36,13 +29,13 @@ function App() {
             <Route path="login" element={<LoginForm />} />
             <Route path="signup" element={<AccountForm />} />
             <Route path="logout" element={<LogoutButton />} />
-
-            <Route path="dashboard" element={<DashBoard />} />
-            <Route path="createCharacterTest" element={<CharacterFormTwo />} />
+            <Route path="campground" element={<Campground />} />
+            <Route path="createCharacter" element={<CharacterForm />} />
             <Route path="selectCharacter" element={<CharacterSelect />} />
             <Route path="characterDetails" element={<CharacterDetailsPage />} />
             <Route path="map" element={<MapUI />} />
-            {/* <Route path="questions" element={<QuestionsDetails />} /> */}
+            <Route path="questions" element={<QuestionsDetails />} />
+            <Route path="shop" element={<Shop />} />
           </Route>
           <Route
             path="*"

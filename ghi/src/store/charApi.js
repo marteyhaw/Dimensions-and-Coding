@@ -15,7 +15,16 @@ export const charApiSlice = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Account", "Token", "Characters", "Character", "CharacterDetails"],
+  tagTypes: [
+    "Account",
+    "Token",
+    "Characters",
+    "Character",
+    "CharacterDetails",
+    "Map",
+    "Answer",
+    "ShopItems",
+  ],
   endpoints: (builder) => ({
     createCharacter: builder.mutation({
       query: (data) => ({
@@ -41,11 +50,21 @@ export const charApiSlice = createApi({
     }),
     getCharacter: builder.query({
       query: (character_id) => `/characters/character/${character_id}`,
-      providesTags: ["Character"],
+      providesTags: (data) => {
+        const tags = [{ type: "Character", id: "noCharID" }];
+        if (!data || !data.id) return tags;
+        const { id } = data;
+        return [{ type: "Characters", id }];
+      },
     }),
     getCharacterDetails: builder.query({
-      query: (character_id) => `/inventories/${character_id}`,
-      providesTags: ["CharacterDetails"],
+      query: (char_id) => `/inventories/${char_id}`,
+      providesTags: (data) => {
+        const tags = [{ type: "CharacterDetails", id: "noCharID" }];
+        if (!data || !data.character_id) return tags;
+        const { character_id } = data;
+        return [{ type: "CharacterDetails", character_id }];
+      },
     }),
   }),
 });
@@ -55,4 +74,6 @@ export const {
   useGetCharactersListQuery,
   useGetCharacterQuery,
   useGetCharacterDetailsQuery,
+  useLazyGetCharactersListQuery,
+  useLazyGetCharacterDetailsQuery,
 } = charApiSlice;

@@ -5,10 +5,10 @@ import { updateField } from "./store/accountSlice";
 import Notification from "./Notifications";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useGetCharactersListQuery } from "./store/charApi";
 import { useGetTokenQuery } from "./store/authApi";
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
+import { useLazyGetCharactersListQuery } from "./store/charApi";
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -17,9 +17,9 @@ function LoginForm() {
   const { username, password } = useSelector((state) => state.account);
   const [logIn, { error, isLoading: logInLoading }] = useLogInMutation();
   const { data: token, refetch: refetchToken } = useGetTokenQuery();
-  const { data: charList, refetch: refetchList } = useGetCharactersListQuery(
-    token?.user.id
-  );
+
+  const [getCharactersList, { data: charList }] =
+    useLazyGetCharactersListQuery();
   const field = useCallback(
     (e) =>
       dispatch(updateField({ field: e.target.name, value: e.target.value })),
@@ -42,18 +42,18 @@ function LoginForm() {
   useEffect(() => {
     const afterSubmit = async () => {
       if (token) {
-        await refetchList();
+        await getCharactersList(token?.user.id);
       }
     };
     afterSubmit();
-  }, [token, refetchList]);
+  }, [token, getCharactersList]);
 
   useEffect(() => {
     const afterTokenRefetching = async () => {
       if (charList) {
         let path;
         if (charList.length === 0) {
-          path = "/ground-7-rule/createCharacterTest";
+          path = "/ground-7-rule/createCharacter";
         } else {
           path = "/ground-7-rule/selectCharacter";
         }
@@ -111,6 +111,7 @@ function LoginForm() {
                       className="form-control"
                       type="email"
                       placeholder="your@email.com"
+                      autoComplete="username"
                     />
                   </div>
                 </div>
@@ -132,6 +133,7 @@ function LoginForm() {
                       className="form-control"
                       type="password"
                       placeholder="Password"
+                      autoComplete="current-password"
                     />
                   </div>
                 </div>

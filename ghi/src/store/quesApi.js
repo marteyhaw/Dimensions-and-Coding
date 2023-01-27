@@ -20,7 +20,9 @@ export const quesApiSlice = createApi({
     "Characters",
     "Character",
     "CharacterDetails",
+    "Map",
     "Answer",
+    "ShopItems",
   ],
   endpoints: (builder) => ({
     getQuestionAnswer: builder.mutation({

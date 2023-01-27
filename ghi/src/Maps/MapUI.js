@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useGetCharacterDetailsQuery } from "../store/charApi";
+// import { useGetCharacterDetailsQuery } from "../store/charApi";
+import { useGetTokenQuery } from "../store/authApi";
 
 function MapMobIcon(props) {
   const iconStyle = {
@@ -13,7 +14,7 @@ function MapMobIcon(props) {
     right: props?.details[1],
   };
   return (
-    <div style={iconStyle}>
+    <div key={props.key} style={iconStyle}>
       {/* <div className="position-relative"> */}
       <img alt="" width={150} height={150} src={props?.details[2]} />
       {/* </div> */}
@@ -29,13 +30,31 @@ function EncounterMobIcon(props) {
     right: props?.details?.y,
   };
   return (
-    <div onClick={props.onClick} style={iconStyle}>
+    <div
+      key={props?.details?.img_path}
+      onClick={props.onClick}
+      style={iconStyle}
+    >
       <img alt="" width={150} height={150} src={props?.details?.img_path} />
     </div>
   );
 }
 
 function MapUI() {
+  // Start of Token and Active character check
+  const { data: token, isLoading: tokenLoading } = useGetTokenQuery();
+  const navigate = useNavigate();
+
+  const { active_character } = useSelector((state) => state.character);
+  useEffect(() => {
+    if (!token && !tokenLoading) {
+      navigate("/ground-7-rule/login");
+    }
+    if (token && !active_character) {
+      navigate("/ground-7-rule/selectCharacter");
+    }
+  }, [token, tokenLoading, active_character, navigate]);
+  // End of Token and Active character check
   const {
     quest1object,
     quest2object,
@@ -48,9 +67,11 @@ function MapUI() {
     quest9object,
   } = useSelector((state) => state.map);
 
-  const { active_character } = useSelector((state) => state.character);
-  const { data: charDetails } = useGetCharacterDetailsQuery(active_character);
-  const navigate = useNavigate();
+  const { stored_char_details: charDetails } = useSelector(
+    (state) => state.character
+  );
+  // const { data: charDetails } = useGetCharacterDetailsQuery(active_character);
+  // const navigate = useNavigate();
 
   const quest_list = [
     "",
@@ -65,7 +86,7 @@ function MapUI() {
     quest9object,
   ];
 
-  let curQuestDetails = quest_list[charDetails?.quest_id.id];
+  let curQuestDetails = quest_list[charDetails?.quest_id?.id];
   // const curQuestDetails = quest_list[5];
 
   const handleOnClick = (event) => {
@@ -85,8 +106,12 @@ function MapUI() {
           onClick={handleOnClick}
           details={curQuestDetails?.encounter}
         />
-        {curQuestDetails?.iconsToRender.map((mob) => {
-          return <MapMobIcon details={mob} />;
+        {curQuestDetails?.iconsToRender.map((mob, index) => {
+          return (
+            <div key={index}>
+              <MapMobIcon details={mob} />
+            </div>
+          );
         })}
       </div>
     </>

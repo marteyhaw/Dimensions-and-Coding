@@ -28,7 +28,7 @@ function AccountForm(props) {
       password,
     });
     if (response.data) {
-      navigate("/ground-7-rule/createCharacterTest");
+      navigate("/ground-7-rule/createCharacter");
     }
   };
 
@@ -112,6 +112,7 @@ function AccountForm(props) {
                       className="form-control"
                       type="text"
                       placeholder="Username"
+                      autoComplete="username"
                     />
                   </div>
                 </div>
@@ -154,6 +155,7 @@ function AccountForm(props) {
                       className="form-control"
                       type="password"
                       placeholder="Password"
+                      autoComplete="current-password"
                     />
                   </div>
                 </div>

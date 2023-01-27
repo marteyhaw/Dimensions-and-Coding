@@ -1,15 +1,34 @@
-import * as React from "react";
-import { useGetCharacterDetailsQuery } from "./store/charApi";
+import React, { useEffect } from "react";
+// import { useGetCharacterDetailsQuery } from "./store/charApi";
 import { useSelector } from "react-redux";
+import { useGetTokenQuery } from "./store/authApi";
+import { useNavigate } from "react-router-dom";
 
 function CharacterDetailsPage(props) {
-  const { active_character } = useSelector((state) => state.character);
-  const { data: charDetails, isLoading: charLoading } =
-    useGetCharacterDetailsQuery(active_character);
+  // Start of Token and Active character check
+  const { data: token, isLoading: tokenLoading } = useGetTokenQuery();
+  const navigate = useNavigate();
+
+  const { active_character, stored_char_details: charDetails } = useSelector(
+    (state) => state.character
+  );
+  useEffect(() => {
+    if (!token && !tokenLoading) {
+      navigate("/ground-7-rule/login");
+    }
+    if (token && !active_character) {
+      navigate("/ground-7-rule/selectCharacter");
+    }
+  }, [token, tokenLoading, active_character, navigate]);
+  // End of Token and Active character check
+
+  // const { active_character } = useSelector((state) => state.character);
+  // const { data: charDetails, isLoading: charLoading } =
+  //   useGetCharacterDetailsQuery(active_character);
 
   return (
     <>
-      {charLoading ? (
+      {tokenLoading ? (
         "Loading..."
       ) : charDetails ? (
         <div className="row">
