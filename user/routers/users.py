@@ -112,7 +112,7 @@ def get_user(
     response: Response,
     repo: UserRepository = Depends(),
 ) -> UserOut:
-    user = repo.get_user(user_id)
+    user = repo.get_user_by_id(user_id)
     if user is None:
         response.status_code = 404
     return user

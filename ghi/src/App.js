@@ -14,7 +14,16 @@ import CharacterFormTwo from "./CharacterFormRTK";
 import CharacterSelect from "./CharacterSelectPage.js";
 import MapUI from "./Maps/MapUI.js";
 
+// import { useGetTokenQuery } from "./store/authApi";
+
+import DashBoard from "./Dashboard.js";
+
 function App() {
+  // const { data: token, isLoading: tokenLoading } = useGetTokenQuery();
+  // if (tokenLoading) {
+  //   return <progress className="progress is-primary" max="100"></progress>;
+  // }
+
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -26,6 +35,8 @@ function App() {
             <Route path="login" element={<LoginForm />} />
             <Route path="signup" element={<AccountForm />} />
             <Route path="logout" element={<LogoutButton />} />
+
+            <Route path="dashboard" element={<DashBoard />} />
             <Route path="createCharacterTest" element={<CharacterFormTwo />} />
             <Route path="selectCharacter" element={<CharacterSelect />} />
             <Route path="map" element={<MapUI />} />

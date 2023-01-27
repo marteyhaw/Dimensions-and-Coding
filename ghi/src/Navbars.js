@@ -11,22 +11,40 @@ function Navbars(props) {
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <NavLink className="navbar-brand" to="/ground-7-rule/">
+          <NavLink
+            className="navbar-brand text-center text-warning"
+            to="/ground-7-rule/"
+          >
             <img
-              src={require("./img/MainLogo.png")}
+              src={require("./img/newlogo.png")}
               alt=""
               width="80"
               height="80"
               className="d-inline-block align-top mr-2"
             />
+            <div>HOME</div>
           </NavLink>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
-              {/* <Nav.Link active aria-current="page" href="/">
-                Home
-              </Nav.Link> */}
-            </Nav>
+            <Nav className="me-auto"></Nav>
+            <NavLink className="navbar-brand" to="/ground-7-rule/dashboard">
+              {tokenLoading ? (
+                "Loading..."
+              ) : token ? (
+                <div className="text-center text-warning">
+                  <img
+                    src={require("./img/newcampfire.png")}
+                    alt=""
+                    width="94"
+                    height="64"
+                    className="d-inline-block align-top "
+                  />
+                  <div>CAMPGROUND</div>
+                </div>
+              ) : (
+                ""
+              )}
+            </NavLink>
             <Nav className="me-auto">
               <NavLink className="navbar-brand" to="/ground-7-rule/inventory">
                 {tokenLoading ? (
@@ -34,13 +52,13 @@ function Navbars(props) {
                 ) : token ? (
                   <div className="text-center text-warning">
                     <img
-                      src={require("./img/backpack.png")}
+                      src={require("./img/newshop.png")}
                       alt=""
                       width="64"
                       height="64"
-                      className="d-inline-block align-top border border-warning"
+                      className="d-inline-block align-top"
                     />
-                    <div>INVENTORY</div>
+                    <div>SHOP</div>
                   </div>
                 ) : (
                   ""
@@ -52,11 +70,11 @@ function Navbars(props) {
                 ) : token ? (
                   <div className="text-center text-warning">
                     <img
-                      src={require("./img/map.png")}
+                      src={require("./img/newmap.png")}
                       alt=""
                       width="64"
                       height="64"
-                      className="d-inline-block align-top border border-warning"
+                      className="d-inline-block align-top b"
                     />
                     <div>MAP</div>
                   </div>
@@ -70,13 +88,14 @@ function Navbars(props) {
                 ) : token ? (
                   <div className="text-center text-warning">
                     <img
-                      src={require("./img/currency2.png")}
+                      src={require("./img/newcurrency.png")}
                       alt=""
-                      width="64"
-                      height="64"
-                      className="d-inline-block align-top border border-warning"
+                      // width="44"
+                      // height="64"
+                      style={{ maxHeight: "64px" }}
+                      className="d-inline-block align-top "
                     />
-                    <div>CURRENCY</div>
+                    <div>SHOP</div>
                   </div>
                 ) : (
                   ""
@@ -88,13 +107,13 @@ function Navbars(props) {
                 ) : token ? (
                   <div className="text-center text-warning">
                     <img
-                      src={require("./img/character.png")}
+                      src={require("./img/newcharacter.png")}
                       alt=""
                       width="64"
                       height="64"
-                      className="d-inline-block align-top border border-warning"
+                      className="d-inline-block align-top "
                     />
-                    <div>CHARACTER</div>
+                    <div style={{ fontSize: "17px" }}>CHARACTER</div>
                   </div>
                 ) : (
                   ""

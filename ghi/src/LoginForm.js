@@ -10,6 +10,8 @@ import { useGetTokenQuery } from "./store/authApi";
 
 function LoginForm() {
   const dispatch = useDispatch();
+  const [showModal, setShowModal] = useState(false);
+
   const { username, password } = useSelector((state) => state.account);
   const [logIn, { error, isLoading: logInLoading }] = useLogInMutation();
   const { data: token, refetch: refetchToken } = useGetTokenQuery();
@@ -61,6 +63,20 @@ function LoginForm() {
 
   return (
     <>
+      {/* <div className="App">
+        {username !== "" ? (
+          <div className="welcome">
+            <h2>
+              {" "}
+              Welcome, <span>(username)</span>
+            </h2>
+            <button>Dashboard</button>
+          </div>
+        ) : (
+          <div>Please Login</div>
+        )}
+      </div> */}
+
       <div className="home-bg">
         <div className="row">
           <div className="offset-3 col-6 text-white">
@@ -127,6 +143,12 @@ function LoginForm() {
                 </button>
               </div>
             </form>
+            <Modal
+              isOpen={showModal}
+              onRequestClose={() => setShowModal(false)}
+            >
+              Welcome, {username}
+            </Modal>
             <div className="text-center">
               <button variant="body2">
                 {" "}

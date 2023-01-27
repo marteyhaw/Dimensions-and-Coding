@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=DynaPuff&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DynaPuff&display=swap");
 .App {
   text-align: center;
   /* background-image: url(/src/img/background.png);
@@ -17,6 +19,214 @@
   color: white;
 }
 
-.input{
+.input {
   margin-top: 10px;
+}
+
+h1 {
+  font-family: "Unbounded", cursive;
+}
+p {
+  font-family: "Unbounded", cursive;
+  font-weight: 700;
+}
+div {
+  font-family: "Unbounded", cursive;
+  font-weight: 200;
+  justify-content: space-between;
+}
+
+.snow_wrap {
+  height: 100vh;
+  width: 100%;
+  background: url(img/offportaltree.png);
+  background-size: cover;
+  background-position: center bottom;
+  overflow: hidden;
+  position: relative;
+}
+
+.snow,
+.snow:before,
+.snow:after {
+  content: "";
+  position: sticky;
+  top: -650px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(4px 4px at 100px 50px, #fff, transparent),
+    radial-gradient(6px 6x at 200px 150px, #fff, transparent),
+    radial-gradient(3px 3px at 300px 250px, #fff 50%, transparent),
+    radial-gradient(4px 4px at 400px 350px, #fff 50%, transparent),
+    radial-gradient(6px 6px at 500px 100px, #fff 50%, transparent),
+    radial-gradient(3px 3px at 50px 200px, #fff 50%, transparent),
+    radial-gradient(4px 4px at 150px 300px, #fff 50%, transparent),
+    radial-gradient(6px 6px at 250px 400px, #fff 50%, transparent),
+    radial-gradient(3px 3px at 350px 500px, #fff 50%, transparent);
+  background-size: 650px 650px;
+  animation: snow 3s linear infinite;
+  content: "";
+}
+.snow:after {
+  margin-left: -250px;
+  opacity: 0.5;
+  filter: blur(2px);
+  animation-duration: 6s;
+  animation-direction: reverse;
+}
+.snow:before {
+  margin-left: -350px;
+  opacity: 0.7;
+  filter: blur(1px);
+  animation-duration: 9s;
+  animation-direction: reverse;
+}
+
+.btn-primary:hover,
+form .form-inner input[type="submit"] {
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 8px;
+  background-image: linear-gradient(
+    to right,
+    #ffce00 50%,
+    #ffce00 50%,
+    #fe4880
+  );
+  font-family: "Unbounded", cursive;
+  background-size: 200%;
+  background-position: 0%;
+  transition: 0.4s;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-primary:hover,
+form .form-inner input[type="submit"]:hover {
+  background-position: 100% 0%;
+}
+
+.welcome {
+  width: 100%;
+  max-width: 480px;
+  background-color: rgb(202, 122, 47);
+  padding: 15px 30px;
+}
+
+.welcome h2 {
+  color: #888;
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+.welcome h2 span {
+  color: #fe4880;
+  font-weight: 700;
+}
+
+.btn-dark:hover,
+form .form-inner input[type="submit"] {
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 8px;
+  background-image: linear-gradient(to right, #e7340d 50%, #e7340d 50%, #fff);
+  background-size: 200%;
+  background-position: 0%;
+  transition: 0.4s;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer !important;
+}
+
+.btn-dark:hover,
+form .form-inner input[type="submit"]:hover {
+  background-position: 100% 0% !important;
+}
+
+.btn-outline-info:hover,
+form .form-inner input[type="submit"] {
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 8px;
+  background-image: linear-gradient(to right, #45ebf1 50%, #45ebf1 50%, #fff);
+  background-size: 200%;
+  background-position: 0%;
+  transition: 0.4s;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-outline-info:hover,
+form .form-inner input[type="submit"]:hover {
+  background-position: 100% 0%;
+}
+
+.navbar-brand:hover,
+form .form-inner input[type="submit"] {
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 8px;
+  /* background-image: linear-gradient(to right, #45ebf1 50%, #45ebf1 50%, #fff); */
+  background-size: 100%;
+  background-position: 0%;
+  transition: 0.4s;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.navbar-brand:hover,
+form .form-inner input[type="submit"]:hover {
+  /* background-position: 200% 0%; */
+  transform: scale(1.15);
+}
+
+.Campground {
+  pointer-events: none;
+  background-color: black;
+  width: 600px;
+  height: 300px;
+  box-shadow: 26px 24px 20px #0000008c;
+  border-radius: 3 px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Campground:before {
+  content: "";
+  background-image: conic-gradient(#ff0052 20deg, transparent 120deg);
+  width: 220%;
+  height: 250%;
+  position: absolute;
+  animation: rotate 4s linear infinite;
+}
+.Campground:after {
+  content: "CAMPGROUND";
+  width: 630px;
+  height: 280px;
+  background: #101010;
+  position: absolute;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ff0052;
+  font-size: larger;
+  letter-spacing: 25px;
+  box-shadow: inset 30px 40px 20px #0000008c;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
 }

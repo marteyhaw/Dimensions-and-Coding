@@ -9,45 +9,66 @@ body {
   justify-content: center;
   background-repeat:no-repeat ; */
 
-
-
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
 html {
--webkit-background-size: cover;
--moz-background-size: cover;
--o-background-size: cover;
-background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 /* set background image per page */
 .home-bg {
-background: url(img/Shah.png) no-repeat center center fixed;
-background-size: cover;
-height: 100vh;
-opacity: 0.75;
+  background: url(img/Shah.png) no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+  opacity: 0.75;
 }
+
+.snow-bg {
+  background: url(img/portaltree.png) no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+  opacity: 0.75;
+  overflow: hidden;
+}
+
+.btn-dark:hover,
+form .form-inner input[type="submit"] {
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 8px;
+  background-image: linear-gradient(to right, #e7340d 50%, #e7340d 50%, #fff);
+  background-size: 200%;
+  background-position: 0%;
+  transition: 0.4s;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer !important;
+}
+
 .sign-bg {
-background: url(img/Andrew.png) no-repeat center center fixed;
-background-size: cover;
-height: 100vh;
-opacity: 0.75;
+  background: url(img/Andrew.png) no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+  opacity: 0.75;
 }
 .contact-bg {
-background: url(img/background.png) no-repeat center center fixed;
-background-size: cover;
-height: 100vh;
-opacity: 0.75;
+  background: url(img/background.png) no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+  opacity: 0.75;
 }
 
 .testimonial-box {

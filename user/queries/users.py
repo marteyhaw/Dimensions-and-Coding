@@ -239,3 +239,34 @@ class UserRepository(BaseModel):
             username=record[4],
             hashed_password=record[5],
         )
+
+    def get_user_by_id(self, user_id) -> Union[Error, UserOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id,
+                        first_name,
+                        last_name,
+                        email,
+                        username
+                        FROM users
+                        WHERE id = %s;
+                        """,
+                        [user_id],
+                    )
+                    record = result.fetchone()
+                    if record is None:
+                        return None
+                    return UserOut(
+                        id=record[0],
+                        first_name=record[1],
+                        last_name=record[2],
+                        email=record[3],
+                        username=record[4],
+                    )
+
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get user"}

@@ -3,10 +3,14 @@ import Swiper from "swiper/bundle";
 import { useEffect } from "react";
 // import CharacterDetailsTwo from "./CharacterDetailsRTK";
 
+// Trying something new
+// import SwiperCore, { EffectFade, Mousewheel, Pagination } from "swiper";
+// import { Champion} from
+
 function LandingPage() {
   useEffect(() => {
     new Swiper(".testimonials-slider", {
-      speed: 600,
+      speed: 1000,
       loop: true,
       autoplay: {
         delay: 5000,
@@ -22,11 +26,13 @@ function LandingPage() {
   }, []);
 
   return (
+    <>
+    <div className="sign-bg">
     <div className="contact-bg">
       <div className="jumbotron centered">
         <div className="container offset-3 col-6 mb-3">
           <i className="fas fa-key fa-6x" />
-          <h1 className="display-3 text-bg-secondary p-3 opacity-50  ">
+          <h1 className="display-3 text-bg-secondary p-3 opacity-50 font-family: DynaPuff cursive;  ">
             Dungeon and Coding
           </h1>
           <p className="lead text-bg-secondary p-3 opacity-50 ">
@@ -56,12 +62,7 @@ function LandingPage() {
                   <div className="swiper-slide">
                     <div className="testimonial-box">
                       <div className="author-test">
-                        <img
-                          src="src/img/Shah.png"
-                          alt=""
-                          className="rounded-circle b-shadow-a"
-                        />
-                        <span className="author">David J</span>
+                        <span className="author">David J.</span>
                       </div>
                       <img
                         src={require("./img/DavidJ.png")}
@@ -89,45 +90,16 @@ function LandingPage() {
                   <div className="swiper-slide">
                     <div className="testimonial-box">
                       <div className="author-test">
-                        <img
-                          src="assets/img/testimonial-4.jpg"
-                          alt=""
-                          className="rounded-circle b-shadow-a"
-                        />
-                        <span className="author">Edmund G</span>
+                        <span className="author">Elviza H.</span>
                       </div>
                       <img
-                        src={require("./img/EdmundG.png")}
+                        src={require("./img/ElvizaH.png")}
                         alt=""
                         width="65"
                         height="65"
                         style={{ borderRadius: "50%" }}
                         className="d-inline-block align-top mr-2"
                       />
-                      <div className="content-test">
-                        <p className="description lead">
-                          "Dungeon and Coding is a unique and fun way to learn
-                          programming concepts. The game combines adventure and
-                          puzzle-solving with coding challenges, making it an
-                          engaging and interactive experience. The deeper I went
-                          into the game, the more I realized that my coding
-                          skills were just as important as my combat skills. I
-                          highly recommend this game to anyone looking to
-                          improve their coding skills while having a blast."
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="swiper-slide">
-                    <div className="testimonial-box">
-                      <div className="author-test">
-                        <img
-                          src="assets/img/testimonial-4.jpg"
-                          alt=""
-                          className="rounded-circle b-shadow-a"
-                        />
-                        <span className="author">Martey</span>
-                      </div>
                       <div className="content-test">
                         <p className="description lead">
                           "Dungeon and Coding is a unique game that combines
@@ -141,6 +113,87 @@ function LandingPage() {
                       </div>
                     </div>
                   </div>
+                  <div className="swiper-slide">
+                    <div className="testimonial-box">
+                      <div className="author-test">
+                        <span className="author">Jackie L.</span>
+                      </div>
+                      <img
+                        src={require("./img/JackieL.png")}
+                        alt=""
+                        width="65"
+                        height="65"
+                        style={{ borderRadius: "50%" }}
+                        className="d-inline-block align-top mr-2"
+                      />
+                      <div className="content-test">
+                        <p className="description lead">
+                          "Dungeon and Coding is a one-of-a-kind and
+                          entertaining game that combines the thrill of dungeon
+                          exploration with the difficulty of coding. The
+                          gameplay is fluid, and the puzzles are
+                          well-thought-out, resulting in a fun and engaging
+                          experience. The graphics in the game are simple but
+                          effective, and the soundtrack is appropriate and
+                          enjoyable. Overall, I strongly recommend this game to
+                          anyone who enjoys dungeon crawlers as well as
+                          programming."
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="swiper-slide">
+                    <div className="testimonial-box">
+                      <div className="author-test">
+                        <span className="author">Edmund G.</span>
+                      </div>
+                      <img
+                        src={require("./img/EdmundG.png")}
+                        alt=""
+                        width="65"
+                        height="65"
+                        style={{ borderRadius: "50%" }}
+                        className="d-inline-block align-top mr-2"
+                      />
+                      <div className="content-test">
+                        <p className="description lead">
+                          "Dungeon and Coding is an innovative game that brings
+                          together the best of both worlds - coding and dungeon
+                          exploration. The game mechanics are well thought out,
+                          and the puzzles are challenging but not impossible to
+                          solve. The graphics are basic but serve their purpose,
+                          and the soundtrack is fitting for the game's
+                          atmosphere. I highly recommend this game to anyone
+                          looking for a unique and engaging experience."
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="swiper-slide">
+                    <div className="testimonial-box">
+                      <div className="author-test">
+                        <span className="author">Martey.</span>
+                      </div>
+                      <img
+                        src={require("./img/MarteyH.png")}
+                        alt=""
+                        width="65"
+                        height="65"
+                        style={{ borderRadius: "50%" }}
+                        className="d-inline-block align-top mr-2"
+                      />
+                      <div className="content-test">
+                        <p className="description lead">
+                          "I was pleasantly surprised by the depth of gameplay
+                          in Dungeon and Coding. The coding puzzles were a great
+                          addition, and I found myself really enjoying the
+                          challenge of figuring them out. The graphics are
+                          fantastic and the sound effects are spot-on. This is
+                          definitely a game worth checking out."
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div className="swiper-pagination"></div>
               </div>
@@ -150,6 +203,8 @@ function LandingPage() {
         </div>
       </div>
     </div>
+    </div>
+    </>
   );
 }
 
