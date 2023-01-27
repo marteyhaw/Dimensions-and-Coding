@@ -12,6 +12,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import CharacterFormTwo from "./CharacterFormRTK";
 import CharacterSelect from "./CharacterSelectPage.js";
+import MapUI from "./Maps/MapUI.js";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="logout" element={<LogoutButton />} />
             <Route path="createCharacterTest" element={<CharacterFormTwo />} />
             <Route path="selectCharacter" element={<CharacterSelect />} />
+            <Route path="map" element={<MapUI />} />
             {/* <Route path="questions" element={<QuestionsDetails />} /> */}
           </Route>
           <Route
