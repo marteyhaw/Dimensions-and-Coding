@@ -3,6 +3,17 @@ stages:
   - build
   - deploy
 
+services:
+  - postgres:14.2-bullseye
+
+variables:
+  DATABASE_URL: postgresql://postgres:test@postgres:5432/postgres
+  POSTGRES_DB: test_db
+  POSTGRES_USER: test_user
+  POSTGRES_PASSWORD: test_password
+  POSTGRES_HOST_AUTH_METHOD: trust
+  SIGNING_KEY: 2sdfag24334gw
+
 # Run flake8 to check for code quality
 lint-test-job:
   image: python:3-bullseye
@@ -36,6 +47,8 @@ user-api-unit-test-job:
 build-dnc-api:
   image: docker:19.03.1
   stage: build
+  needs:
+    - dnc-api-unit-test-job
   services:
     - docker:19.03.1-dind
   before_script:
@@ -62,6 +75,8 @@ build-dnc-api:
 build-user-api:
   image: docker:19.03.1
   stage: build
+  needs:
+    - user-api-unit-test-job
   services:
     - docker:19.03.1-dind
   before_script:
@@ -91,6 +106,8 @@ build-front-end-job:
   image: node:lts-bullseye
   needs:
     - lint-test-job
+    - dnc-api-unit-test-job
+    - user-api-unit-test-job
   variables:
     # If either of these variables is defined in the GitLab
     # CI/CD variables, that value will override the value here.

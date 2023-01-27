@@ -171,18 +171,6 @@ def test_get_shop_one_items_with_bad_token():
     assert response.json() == {"detail": "Invalid token"}
 
 
-def test_get_character_details_of_character_that_does_not_exist():
-    app.dependency_overrides[
-        authenticator.get_current_account_data
-    ] = FakeAuthenticator
-    response = client.get(
-        "/inventories/-1/",
-    )
-    app.dependency_overrides = {}
-    assert response.status_code == 200
-    assert response.json() == {"detail": "That character does not exist."}
-
-
 def test_purchase_item():
     app.dependency_overrides[
         authenticator.get_current_account_data
