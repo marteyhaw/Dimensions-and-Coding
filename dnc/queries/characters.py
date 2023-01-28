@@ -123,6 +123,7 @@ class CharacterRepo:
                     JOIN class
                     ON class_id = class.id
                     WHERE user_id = %s
+                    ORDER BY characters.id ASC;
                     """,
                     [user_id],
                 )

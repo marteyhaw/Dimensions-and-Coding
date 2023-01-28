@@ -17,8 +17,7 @@ function LogoutButton() {
       <img
         src={require("./img/newdoor.png")}
         alt=""
-        width="64"
-        height="64"
+        style={{ maxHeight: "64px" }}
         className="d-inline-block align-top mr-2 "
         onClick={logOut}
       />

@@ -19,8 +19,7 @@ function Navbars(props) {
             <img
               src={require("./img/newlogo.png")}
               alt=""
-              width="80"
-              height="80"
+              style={{ maxHeight: "80px" }}
               className="d-inline-block align-top mr-2"
             />
             <div>HOME</div>
@@ -36,8 +35,7 @@ function Navbars(props) {
                   <img
                     src={require("./img/newcampfire.png")}
                     alt=""
-                    width="94"
-                    height="64"
+                    style={{ maxHeight: "64px" }}
                     className="d-inline-block align-top "
                   />
                   <div>CAMPGROUND</div>
@@ -58,8 +56,7 @@ function Navbars(props) {
                     <img
                       src={require("./img/newshop.png")}
                       alt=""
-                      width="64"
-                      height="64"
+                      style={{ maxHeight: "64px" }}
                       className="d-inline-block align-top"
                     />
                     <div>INVENTORY</div>
@@ -76,8 +73,7 @@ function Navbars(props) {
                     <img
                       src={require("./img/newmap.png")}
                       alt=""
-                      width="64"
-                      height="64"
+                      style={{ maxHeight: "64px" }}
                       className="d-inline-block align-top b"
                     />
                     <div>MAP</div>
@@ -94,8 +90,6 @@ function Navbars(props) {
                     <img
                       src={require("./img/newcurrency.png")}
                       alt=""
-                      // width="44"
-                      // height="64"
                       style={{ maxHeight: "64px" }}
                       className="d-inline-block align-top "
                     />
@@ -116,8 +110,7 @@ function Navbars(props) {
                     <img
                       src={require("./img/newcharacter.png")}
                       alt=""
-                      width="64"
-                      height="64"
+                      style={{ maxHeight: "64px" }}
                       className="d-inline-block align-top "
                     />
                     <div style={{ fontSize: "17px" }}>CHARACTER</div>

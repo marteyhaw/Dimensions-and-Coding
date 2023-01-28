@@ -36,6 +36,9 @@ export default function QuestionContent(props) {
       char_answer: answerOption,
     });
     if (isAnswerRight.data) {
+      if (props.quest_id === 9) {
+        navigate("/ground-7-rule/victory");
+      }
       refetchCharDetails();
       setHideQuestion(true);
       setShowAlert(true);
@@ -53,14 +56,11 @@ export default function QuestionContent(props) {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log("isSuccessed");
       dispatch(
         updateField({ field: "stored_char_details", value: character_details })
       );
       if (showAlert) {
-        setShowAlert(null);
         setTimeout(() => {
-          console.log("Navigating");
           navigate("/ground-7-rule/map");
         }, 2500);
       }
@@ -72,6 +72,8 @@ export default function QuestionContent(props) {
     isSuccess,
     navigate,
     showAlert,
+    hideQuestion,
+    props.quest_id,
   ]);
 
   return (
@@ -122,7 +124,7 @@ export default function QuestionContent(props) {
                   severity="error"
                   sx={{ display: "all" }}
                 >
-                  Oopsie... try again!
+                  You picked the wrong answer and sustained 1 damage to your HP.
                 </Alert>
               )}
               {showAlert === true && (
@@ -131,7 +133,8 @@ export default function QuestionContent(props) {
                   severity="success"
                   sx={{ display: "all" }}
                 >
-                  Success! You are one step closer to graduation!
+                  Success! You are one step closer to graduation! You've been
+                  awarded 1 coin.
                 </Alert>
               )}
             </Stack>
@@ -139,7 +142,8 @@ export default function QuestionContent(props) {
         </div>
       ) : (
         <Alert variant="outlined" severity="success" sx={{ display: "all" }}>
-          Success! You are one step closer to graduation!
+          Success! You are one step closer to graduation! You've been awarded 1
+          coin.
         </Alert>
       )}
     </FormControl>

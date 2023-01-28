@@ -16,6 +16,7 @@ import QuestionsDetails from "./questions/index.js";
 import Campground from "./Campground.js";
 import CharacterDetailsPage from "./CharacterDetailsPage.js";
 import Shop from "./Shop.js";
+import VictoryPage from "./VictoryPage.js"
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route path="map" element={<MapUI />} />
             <Route path="questions" element={<QuestionsDetails />} />
             <Route path="shop" element={<Shop />} />
+            <Route path="victory" element={<VictoryPage />} />
           </Route>
           <Route
             path="*"

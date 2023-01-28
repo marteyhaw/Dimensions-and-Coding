@@ -142,8 +142,8 @@ function CharacterSelect(props) {
                                       <img
                                         align="center"
                                         style={{
-                                          height: "200px",
-                                          width: "300px",
+                                          minHeight: "200px",
+                                          minWidth: "300px",
                                         }}
                                         src={require(`./img/${char.img_url}`)}
                                         className="img-thumbnail"

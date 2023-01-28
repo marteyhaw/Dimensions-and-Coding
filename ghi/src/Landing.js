@@ -1,6 +1,7 @@
 import React from "react";
 import Swiper from "swiper/bundle";
 import { useEffect } from "react";
+import background from "./img/edmundwins.png";
 
 function LandingPage() {
   useEffect(() => {
@@ -21,10 +22,64 @@ function LandingPage() {
   }, []);
 
   return (
-    <>
+    <div
+      style={{
+        backgroundImage: `url(${background})`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        paddingBottom: "30%",
+      }}
+    >
+      <div className="px-4 py-5 text-center">
+        <img
+          className="d-block mx-auto mb-4"
+          src={require("./img/newlogo.png")}
+          alt=""
+          style={{ maxHeight: "250px" }}
+        />
+        <div className="py-5 container landing-bg">
+          <h1
+            className="display-5 fw-bold"
+            style={{ color: "white", textShadow: "#FFF 1px 0 20px" }}
+          >
+            Dimensions and Coding
+          </h1>
+          <div className="col-lg-6 mx-auto">
+            <p
+              className="lead mb-4"
+              style={{ color: "", textShadow: "#FFF 1px 0 20px" }}
+            >
+              Brave adventurers use programming skills to conquer new type of
+              dimension filled with puzzles and obstacles. They discovered the
+              puzzles not only challenging but also taught new coding
+              techniques. The deeper they went, the more they realized their
+              coding skills were as important as their combat skills. The game
+              of Dimensions and Coding was born, providing a fun and engaging
+              way to learn and practice coding. Are you ready to join the
+              adventure and improve your coding skills with Dimensions and
+              Coding?
+            </p>
+            <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+              <button
+                type="button"
+                className="btn btn-warning btn-lg px-4 gap-3"
+              >
+                Login
+              </button>
+              <button
+                type="button"
+                className="btn btn-outline-warning btn-lg px-4"
+              >
+                Signup
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
       <div>
-        <div className="contact-bg">
-          <div className="jumbotron centered">
+        {/* <div className="contact-bg"> */}
+        {/* <div className="jumbotron centered">
             <div className="container offset-3 col-6 mb-3">
               <i className="fas fa-key fa-6x" />
               <h1 className="text-center display-3 text-bg-secondary p-3 font-family: DynaPuff cursive;  ">
@@ -43,8 +98,8 @@ function LandingPage() {
               </p>
               <hr />
             </div>
-          </div>
-          <div className="testimonials paralax-mf bg-image">
+          </div> */}
+        {/* <div className="testimonials paralax-mf bg-image">
             <div className="overlay-mf"></div>
             <div className="container">
               <div className="row">
@@ -204,10 +259,10 @@ function LandingPage() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
       </div>
-    </>
+    </div>
   );
 }
 

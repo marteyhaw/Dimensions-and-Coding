@@ -117,13 +117,13 @@ const initialState = {
       h: "100%",
     },
     encounter: {
-      x: 575,
-      y: 1150,
+      x: 645,
+      y: 850,
       img_path: Lizardman,
     },
     iconsToRender: [
-      [465, 525, FireDemon],
-      [255, 945, Dragon],
+      [465, 200, FireDemon],
+      [215, 630, Dragon],
     ],
   },
   quest8object: {
@@ -134,12 +134,12 @@ const initialState = {
     },
     encounter: {
       x: 465,
-      y: 525,
+      y: 200,
       img_path: FireDemon,
     },
     iconsToRender: [
-      [575, 1150, Lizardman],
-      [255, 945, Dragon],
+      [645, 850, Lizardman],
+      [215, 630, Dragon],
     ],
   },
   quest9object: {
@@ -149,13 +149,13 @@ const initialState = {
       h: "100%",
     },
     encounter: {
-      x: 255,
-      y: 945,
+      x: 215,
+      y: 630,
       img_path: Dragon,
     },
     iconsToRender: [
-      [575, 1150, Lizardman],
-      [465, 525, FireDemon],
+      [645, 850, Lizardman],
+      [465, 200, FireDemon],
     ],
   },
 };

@@ -215,7 +215,7 @@ function CharacterForm(props) {
     e.preventDefault();
     const response = await createCharacter(prepSubmit());
     if (response.data) {
-      navigate("/ground-7-rule/characterSelect");
+      navigate("/ground-7-rule/selectCharacter");
     }
   };
 

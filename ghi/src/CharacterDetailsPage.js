@@ -33,7 +33,7 @@ function CharacterDetailsPage(props) {
       ) : charDetails ? (
         <div className="row">
           <div className="offset-1 col-3 align-self-center">
-            <div className="card card-body">
+            <div className="mt-3 card card-body">
               <ul className="list-group list-group-flush">
                 <li className="list-group-item" style={{ textAlign: "center" }}>
                   {charDetails.character_name}
@@ -41,8 +41,9 @@ function CharacterDetailsPage(props) {
                 <li className="list-group-item" style={{ textAlign: "center" }}>
                   <img
                     style={{
-                      height: "250px",
-                      width: "250px",
+                      objectFit: "cover",
+                      maxHeight: "250px",
+                      maxWidth: "auto",
                     }}
                     src={require(`./img/${charDetails.img_url}`)}
                     className="img-thumbnail"
@@ -81,7 +82,7 @@ function CharacterDetailsPage(props) {
                             height: "50px",
                             width: "50px",
                           }}
-                          src={require(`./img/sword.png`)}
+                          src={require(`./img/items/${items.img}`)}
                           className="img-thumbnail"
                           alt="class-img"
                         />

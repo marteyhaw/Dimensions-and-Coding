@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { useLazyGetCharacterDetailsQuery } from "./store/charApi";
 import { useGetTokenQuery } from "./store/authApi";
 import { useNavigate } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function Shop() {
   // Start of Token and Active character check
@@ -75,42 +76,48 @@ export default function Shop() {
                 {stored_char_details?.currency}
               </div>
               <h1 className="text-white" style={{ textAlign: "center" }}>
-                {isLoading ? "Loading..." : shopItems?.shop_name}
+                {isLoading ? (
+                  <CircularProgress color="warning" />
+                ) : (
+                  shopItems?.shop_name
+                )}
               </h1>
               <div className="container">
                 <div className="row">
-                  {isLoading
-                    ? "Loading..."
-                    : shopItems?.items.map((item) => {
-                        return (
-                          <Card
-                            key={item.id}
-                            style={{ width: "18rem" }}
-                            className="p-0 bg-dark bg-gradient border border-warning border-2"
-                          >
-                            <Card.Img
-                              variant="top"
-                              src={require(`./img/items/${item.img}`)}
-                              style={{
-                                objectFit: "cover",
-                                maxHeight: "250px",
-                                maxWidth: "auto",
-                              }}
-                            />
-                            <Card.Body className="text-center align-bottom text-white">
-                              <Card.Title>{item.name}</Card.Title>
-                              <Card.Text>{item.description}</Card.Text>
-                              <Button
-                                onClick={tryBuy}
-                                value={item.id}
-                                variant="warning"
-                              >
-                                Purchase for {item.price} coin
-                              </Button>
-                            </Card.Body>
-                          </Card>
-                        );
-                      })}
+                  {isLoading ? (
+                    <CircularProgress color="warning" />
+                  ) : (
+                    shopItems?.items.map((item) => {
+                      return (
+                        <Card
+                          key={item.id}
+                          style={{ width: "18rem" }}
+                          className="p-0 bg-dark bg-gradient border border-warning border-2"
+                        >
+                          <Card.Img
+                            variant="top"
+                            src={require(`./img/items/${item.img}`)}
+                            style={{
+                              objectFit: "cover",
+                              maxHeight: "250px",
+                              maxWidth: "auto",
+                            }}
+                          />
+                          <Card.Body className="text-center align-bottom text-white">
+                            <Card.Title>{item.name}</Card.Title>
+                            <Card.Text>{item.description}</Card.Text>
+                            <Button
+                              onClick={tryBuy}
+                              value={item.id}
+                              variant="warning"
+                            >
+                              Purchase for {item.price} coin
+                            </Button>
+                          </Card.Body>
+                        </Card>
+                      );
+                    })
+                  )}
                 </div>
               </div>
             </div>
