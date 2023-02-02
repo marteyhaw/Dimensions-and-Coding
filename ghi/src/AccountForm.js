@@ -1,11 +1,13 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSignUpMutation } from "./store/authApi";
 import { updateField } from "./store/accountSlice";
 import Notification from "./Notifications";
 import { useNavigate } from "react-router-dom";
+import { Modal } from "react-bootstrap";
 
 function AccountForm(props) {
+  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const { first_name, last_name, username, email, password } = useSelector(
     (state) => state.account
@@ -30,7 +32,17 @@ function AccountForm(props) {
     if (response.data) {
       navigate("/ground-7-rule/createCharacter");
     }
+    if (response.status === 500) {
+      console.log(error);
+      setShowModal(true);
+    }
   };
+
+  useEffect(() => {
+    if (error?.status === "FETCH_ERROR") {
+      setShowModal(true);
+    }
+  }, [error]);
 
   return (
     <>
@@ -68,7 +80,11 @@ function AccountForm(props) {
               Sign up
             </p>
             {error ? (
-              <Notification type="danger">{error?.data?.detail}</Notification>
+              <Notification type="danger">
+                {error.status === "FETCH_ERROR"
+                  ? "Signup failed. Please try again in a moment."
+                  : "There was a problem signing up"}
+              </Notification>
             ) : null}
             <form method="POST" onSubmit={(e) => attemptSubmit(e)}>
               <div className="d-flex flex-row align-items-center mb-4 ">
@@ -187,6 +203,16 @@ function AccountForm(props) {
                 </button>
               </div>
             </form>
+            <Modal
+              centered
+              show={showModal}
+              onHide={() => setShowModal(false)}
+              contentClassName="py-3 bg-danger text-white fw-bold text-center"
+            >
+              There was a problem signing up.
+              <br />
+              Please try again in a moment.
+            </Modal>
           </div>
         </div>
       </div>

@@ -72,20 +72,6 @@ function LoginForm() {
 
   return (
     <>
-      {/* <div className="App">
-        {username !== "" ? (
-          <div className="welcome">
-            <h2>
-              {" "}
-              Welcome, <span>(username)</span>
-            </h2>
-            <button>Dashboard</button>
-          </div>
-        ) : (
-          <div>Please Login</div>
-        )}
-      </div> */}
-
       <div className="login-bg" style={{ position: "relative" }}>
         <img
           src={require("./img/Shah.png")}
@@ -119,7 +105,7 @@ function LoginForm() {
             {error ? (
               <Notification type="danger">
                 {error.status === "FETCH_ERROR"
-                  ? "Login failed"
+                  ? "Login failed. Please try again in a moment."
                   : "There was a problem logging in"}
               </Notification>
             ) : null}
