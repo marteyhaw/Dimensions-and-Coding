@@ -2,6 +2,7 @@ import React from "react";
 import Swiper from "swiper/bundle";
 import { useEffect } from "react";
 import background from "./img/edmundwins.png";
+import { NavLink } from "react-router-dom";
 
 function LandingPage() {
   useEffect(() => {
@@ -61,18 +62,22 @@ function LandingPage() {
               Coding?
             </p>
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <button
-                type="button"
-                className="btn btn-warning btn-lg px-4 gap-3"
-              >
-                Login
-              </button>
-              <button
-                type="button"
-                className="btn btn-outline-warning btn-lg px-4"
-              >
-                Signup
-              </button>
+              <NavLink to="/ground-7-rule/login">
+                <button
+                  type="button"
+                  className="btn btn-warning btn-lg px-4 gap-3"
+                >
+                  Login
+                </button>
+              </NavLink>
+              <NavLink to="/ground-7-rule/signup">
+                <button
+                  type="button"
+                  className="btn btn-outline-warning btn-lg px-4"
+                >
+                  Signup
+                </button>
+              </NavLink>
             </div>
           </div>
         </div>
