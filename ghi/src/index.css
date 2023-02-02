@@ -77,11 +77,22 @@ html {
   height: 100vh;
   opacity: 1;
 }
-.home-bg {
+.sign-bg {
+  background: url(img/Andrew.png) no-repeat center center fixed;
+  background-color: #7f4b19;
+  height: 100%;
+}
+.login-bg {
   background: url(img/Shah.png) no-repeat center center fixed;
+  background-color: #bc966f;
+  height: 100%;
+}
+
+.inventory-bg {
+  background: url(img/pixellated_tavern.jpg) no-repeat center center fixed;
   background-size: cover;
   height: 100vh;
-  opacity: 0.75;
+  opacity: 1;
 }
 
 .snow-bg {
@@ -106,12 +117,6 @@ form .form-inner input[type="submit"] {
   cursor: pointer !important;
 }
 
-.sign-bg {
-  background: url(img/Andrew.png) no-repeat center center fixed;
-  background-size: cover;
-  height: 100vh;
-  opacity: 0.75;
-}
 .contact-bg {
   background: url(img/background.png) no-repeat center center fixed;
   background-size: cover;

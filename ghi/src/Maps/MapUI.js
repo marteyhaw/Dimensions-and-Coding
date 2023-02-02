@@ -34,8 +34,9 @@ function EncounterMobIcon(props) {
       key={props?.details?.img_path}
       onClick={props.onClick}
       style={iconStyle}
+      className="map-icon-bounce"
     >
-      <img alt="" width={150} height={150} src={props?.details?.img_path} />
+      <img alt="" width={200} height={200} src={props?.details?.img_path} />
     </div>
   );
 }
@@ -94,7 +95,11 @@ function MapUI() {
   };
 
   return (
-    <>
+    <div
+      style={{
+        backgroundColor: "gray",
+      }}
+    >
       <div className="container position-relative">
         <img
           alt=""
@@ -114,7 +119,7 @@ function MapUI() {
           );
         })}
       </div>
-    </>
+    </div>
   );
 }
 

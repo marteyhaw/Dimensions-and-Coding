@@ -39,14 +39,14 @@ function LandingPage() {
           alt=""
           style={{ maxHeight: "250px" }}
         />
-        <div className="py-5 container landing-bg">
+        <div className="py-5 container landing-bg w-50">
           <h1
             className="display-5 fw-bold"
             style={{ color: "white", textShadow: "#FFF 1px 0 20px" }}
           >
             Dimensions and Coding
           </h1>
-          <div className="col-lg-6 mx-auto">
+          <div className="mx-auto">
             <p
               className="lead mb-4"
               style={{ color: "", textShadow: "#FFF 1px 0 20px" }}

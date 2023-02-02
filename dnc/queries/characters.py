@@ -38,14 +38,12 @@ class CharacterOut(BaseModel):
 
 
 class CharacterRepo:
-    url_1 = "https://jamestownnd.gov/wp-content/"
-    url_2 = "uploads/2018/06/blank-silhouette.png"
 
     def create_character(
         self,
         character: CharacterIn,
         user_id: int = 0,
-        img_url: str = url_1 + url_2,
+        img_url: str = "Dog.JPG",
         quest_id: int = 1,
         health: int = 5,
         currency: int = 0,

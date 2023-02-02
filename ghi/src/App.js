@@ -16,7 +16,8 @@ import QuestionsDetails from "./questions/index.js";
 import Campground from "./Campground.js";
 import CharacterDetailsPage from "./CharacterDetailsPage.js";
 import Shop from "./Shop.js";
-import VictoryPage from "./VictoryPage.js"
+import VictoryPage from "./VictoryPage.js";
+import Footer from "./Footer";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
             }
           />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </Provider>
   );

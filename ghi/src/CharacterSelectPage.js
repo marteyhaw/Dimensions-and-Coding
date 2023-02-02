@@ -131,7 +131,10 @@ function CharacterSelect(props) {
                             onChange={field}
                           >
                             <div className="container-fluid">
-                              <div className="row">
+                              <div
+                                className="row"
+                                style={{ justifyContent: "start" }}
+                              >
                                 {charList.map((char, index) => (
                                   <div
                                     className="col-4"

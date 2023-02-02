@@ -26,7 +26,7 @@ const initialState = {
     },
     iconsToRender: [
       [900, 940, Goblin2],
-      [250, 1000, Goblin3],
+      [200, 750, Goblin3],
     ],
   },
   quest2object: {
@@ -42,7 +42,7 @@ const initialState = {
     },
     iconsToRender: [
       [810, 370, Goblin1],
-      [250, 1000, Goblin3],
+      [200, 750, Goblin3],
     ],
   },
   quest3object: {
@@ -52,8 +52,8 @@ const initialState = {
       h: "100%",
     },
     encounter: {
-      x: 250,
-      y: 1000,
+      x: 200,
+      y: 750,
       img_path: Goblin3,
     },
     iconsToRender: [
@@ -73,7 +73,7 @@ const initialState = {
       img_path: DeathKnight,
     },
     iconsToRender: [
-      [330, 810, FrostGoblin],
+      [330, 760, FrostGoblin],
       [150, 215, ElementalDemon],
     ],
   },
@@ -85,7 +85,7 @@ const initialState = {
     },
     encounter: {
       x: 330,
-      y: 810,
+      y: 760,
       img_path: FrostGoblin,
     },
     iconsToRender: [
@@ -106,7 +106,7 @@ const initialState = {
     },
     iconsToRender: [
       [760, 500, DeathKnight],
-      [330, 810, FrostGoblin],
+      [330, 760, FrostGoblin],
     ],
   },
 

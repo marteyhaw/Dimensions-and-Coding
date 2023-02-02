@@ -37,6 +37,10 @@ function LoginForm() {
     if (response.data) {
       await refetchToken();
     }
+    if (response.status === 500) {
+      console.log(error);
+      setShowModal(true);
+    }
   };
 
   useEffect(() => {
@@ -45,8 +49,11 @@ function LoginForm() {
         await getCharactersList(token?.user.id);
       }
     };
+    if (error?.status === "FETCH_ERROR") {
+      setShowModal(true);
+    }
     afterSubmit();
-  }, [token, getCharactersList]);
+  }, [token, getCharactersList, error]);
 
   useEffect(() => {
     const afterTokenRefetching = async () => {
@@ -79,26 +86,48 @@ function LoginForm() {
         )}
       </div> */}
 
-      <div className="home-bg">
-        <div className="row">
-          <div className="offset-3 col-6 text-white">
-            <div className="shadow p-4 mt-4">
-              <p className="whiteText text-center h3">
+      <div className="login-bg" style={{ position: "relative" }}>
+        <img
+          src={require("./img/Shah.png")}
+          alt="login-bg"
+          style={{
+            display: "block",
+            margin: "0 auto",
+          }}
+        />
+        <div style={{ position: "absolute", left: 0, top: 0, width: "100%" }}>
+          <div
+            className="text-white"
+            style={{
+              textShadow: "#000 1px 0 20px",
+              margin: "0 auto",
+              width: "40%",
+            }}
+          >
+            <div className="p-2 mt-4">
+              <p className="text-center h3">
                 Slayer, welcome back to the Battlefield. Your kingdom awaits
                 upon your arrival.
               </p>
             </div>
-            <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+            <p
+              className="text-center h1 fw-bold mx-1 mx-md-4 mt-0"
+              style={{ marginBottom: "12rem" }}
+            >
               Login
             </p>
             {error ? (
-              <Notification type="danger">{error.data.detail}</Notification>
+              <Notification type="danger">
+                {error.status === "FETCH_ERROR"
+                  ? "Login failed"
+                  : "There was a problem logging in"}
+              </Notification>
             ) : null}
             <form method="POST" onSubmit={(e) => attemptSubmit(e)}>
               <div className="d-flex flex-row align-items-center mb-4 ">
                 <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                 <div className="form-outline flex-fill mb-0">
-                  <label className="label" htmlFor="username">
+                  <label className="label fw-bold" htmlFor="username">
                     Username
                   </label>
                   <div className="control">
@@ -120,7 +149,7 @@ function LoginForm() {
               <div className="d-flex flex-row align-items-center mb-4 ">
                 <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                 <div className="form-outline flex-fill mb-0">
-                  <label className="label" htmlFor="password">
+                  <label className="label fw-bold" htmlFor="password">
                     Password
                   </label>
                   <div className="control">
@@ -141,17 +170,21 @@ function LoginForm() {
               <div className="text-center">
                 <button
                   disabled={logInLoading}
-                  className="btn btn-primary btn-lg"
+                  className="btn btn-primary btn-lg mb-3"
                 >
                   Sign in
                 </button>
               </div>
             </form>
             <Modal
-              isOpen={showModal}
-              onRequestClose={() => setShowModal(false)}
+              centered
+              show={showModal}
+              onHide={() => setShowModal(false)}
+              contentClassName="py-3 bg-danger text-white fw-bold text-center"
             >
-              Welcome, {username}
+              There was a problem logging in.
+              <br />
+              Please try again in a few seconds.
             </Modal>
             <div className="text-center">
               <button variant="body2">

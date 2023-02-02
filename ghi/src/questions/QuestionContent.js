@@ -26,7 +26,7 @@ export default function QuestionContent(props) {
 
   const [answerOption, setAnswerOption] = useState("");
   const [showAlert, setShowAlert] = useState(null);
-  const [hideQuestion, setHideQuestion] = useState(false);
+  // const [hideQuestion, setHideQuestion] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,7 +40,7 @@ export default function QuestionContent(props) {
         navigate("/ground-7-rule/victory");
       }
       refetchCharDetails();
-      setHideQuestion(true);
+      props.setHideQuestion(true);
       setShowAlert(true);
       setTimeout(async () => {
         setShowAlert(null);
@@ -72,15 +72,19 @@ export default function QuestionContent(props) {
     isSuccess,
     navigate,
     showAlert,
-    hideQuestion,
+    props.hideQuestion,
     props.quest_id,
   ]);
 
   return (
-    <FormControl>
-      {hideQuestion !== true ? (
+    <FormControl style={{ backgroundColor: "darkgrey" }}>
+      {props.hideQuestion !== true ? (
         <div>
-          <FormLabel id="demo-radio-buttons-group-label">
+          <FormLabel
+            id="demo-radio-buttons-group-label"
+            className="text-white fw-bold"
+            style={{ fontSize: "18px" }}
+          >
             {props?.currentQuestion?.question}
           </FormLabel>
           <RadioGroup
@@ -106,7 +110,7 @@ export default function QuestionContent(props) {
           </RadioGroup>
           <Button
             variant="contained"
-            color="success"
+            color="warning"
             disabled={!props?.currentQuestion?.question}
             onClick={handleSubmit}
           >

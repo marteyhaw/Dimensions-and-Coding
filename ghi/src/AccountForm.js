@@ -34,11 +34,26 @@ function AccountForm(props) {
 
   return (
     <>
-      <div className="sign-bg">
-        <div className="row">
-          <div className="offset-3 col-6">
-            <div className="shadow p-4 text-white mt-4 text-white text-white">
-              <p>
+      <div className="sign-bg" style={{ position: "relative" }}>
+        <img
+          src={require("./img/Andrew.png")}
+          alt="login-bg"
+          style={{
+            display: "block",
+            margin: "0 auto",
+          }}
+        />
+        <div style={{ position: "absolute", left: 0, top: 0, width: "100%" }}>
+          <div
+            className="text-white"
+            style={{
+              textShadow: "#000 1px 0 20px",
+              margin: "0 auto",
+              width: "40%",
+            }}
+          >
+            <div className="p-2 mt-4">
+              <p className="text-center h5">
                 "Welcome to the darkness, where fear and uncertainty reign. Are
                 you brave enough to enter the abyss and face your deepest fears?
                 Sign up now and enter a world of horror, where every step you
@@ -46,8 +61,10 @@ function AccountForm(props) {
                 turning back."
               </p>
             </div>
-
-            <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 text-white mt-4 text-white ">
+            <p
+              className="text-center h1 fw-bold mx-1 mx-md-4 text-white mt-4 text-white"
+              style={{ marginBottom: "18rem" }}
+            >
               Sign up
             </p>
             {error ? (
@@ -170,27 +187,6 @@ function AccountForm(props) {
                 </button>
               </div>
             </form>
-
-            <div className="dropdown-divider"></div>
-            <div className="card">
-              <div className="card-header">Quote</div>
-              <div className="card-body">
-                <blockquote className="blockquote mb-0">
-                  <p>"The greatest adventure is what lies ahead."</p>
-                  <footer className="blockquote-footer">J.R.R. Tolkien</footer>
-                </blockquote>
-              </div>
-            </div>
-            <div
-              className="d-flex flex-column
-            flex-md-row text-center
-            text-md-start justify-content-between
-            py-4 text-white px-4 text-white px-xl-5 bg-primary"
-            >
-              <div className="text-white mb-3 mb-md-0">
-                Copyright © 2020. All rights reserved.
-              </div>
-            </div>
           </div>
         </div>
       </div>

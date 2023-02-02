@@ -33,7 +33,6 @@ p {
 div {
   font-family: "Unbounded", cursive;
   font-weight: 200;
-  justify-content: space-between;
 }
 
 .snow_wrap {
@@ -165,30 +164,65 @@ form .form-inner input[type="submit"]:hover {
   background-position: 100% 0%;
 }
 
-.navbar-brand:hover,
+/* .navbar-brand:hover,
 form .form-inner input[type="submit"] {
   display: inline-block;
   padding: 10px 15px;
   border-radius: 8px;
-  /* background-image: linear-gradient(to right, #45ebf1 50%, #45ebf1 50%, #fff); */
+  background-image: linear-gradient(to right, #45ebf1 50%, #45ebf1 50%, #fff);
   background-size: 100%;
   background-position: 0%;
   transition: 0.4s;
   color: #fff;
   font-weight: 700;
   cursor: pointer;
-}
+} */
 
 .navbar-brand:hover,
 form .form-inner input[type="submit"]:hover {
   /* background-position: 200% 0%; */
-  transform: scale(1.15);
+  /* transform: scale(1.15); */
+  animation: bounce 0.2s linear;
+}
+
+.map-icon-bounce:hover {
+  animation: bounce 0.2s linear;
+  cursor: pointer;
+  clip-path: circle(50% at 50% 50%);
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.monster-icon-breathing {
+  animation: breathing 2s ease-in-out infinite;
+}
+
+@keyframes breathing {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .Campground {
   pointer-events: none;
   background-color: black;
-  width: 600px;
+  width: 500px;
   height: 300px;
   box-shadow: 26px 24px 20px #0000008c;
   border-radius: 3 px;
@@ -228,5 +262,85 @@ form .form-inner input[type="submit"]:hover {
   }
   100% {
     transform: rotate(-360deg);
+  }
+}
+
+.mo-fire {
+  height: auto;
+  position: absolute;
+  bottom: 170px;
+  z-index: 1;
+}
+
+#svg-view {
+  width: 252px;
+  height: 125px;
+  left: 0px;
+}
+
+.mo-fire svg {
+  width: 100%;
+  height: auto;
+  position: relative;
+  right: 40px;
+}
+.flame {
+  animation-name: flameDisappear;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  opacity: 0.5;
+  transform-origin: 45% 45% 0;
+}
+.flame.one {
+  animation-delay: 1s;
+  animation-duration: 3s;
+}
+.flame.two {
+  animation-duration: 5s;
+  animation-delay: 1s;
+}
+
+.flame-main {
+  animation-name: flameMovement;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.flame-main.one {
+  animation-duration: 2.2s;
+  animation-delay: 1s;
+}
+.flame-main.two {
+  animation-duration: 2s;
+  animation-delay: 1s;
+}
+.flame-main.three {
+  animation-duration: 2.1s;
+  animation-delay: 3s;
+}
+.flame-main.four {
+  animation-duration: 3.2s;
+  animation-delay: 4s;
+}
+.flame-main.five {
+  animation-duration: 2.5s;
+  animation-delay: 5s;
+}
+@keyframes flameMovement {
+  50% {
+    transform: scale(0.98, 1) translate(0, 2px) rotate(-1deg);
+  }
+}
+@keyframes flameDisappear {
+  0% {
+    transform: translate(0) rotate(180deg);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-10px, -40px) rotate(180deg);
+    opacity: 0;
   }
 }

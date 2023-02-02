@@ -27,15 +27,18 @@ function CharacterDetailsPage(props) {
   //   useGetCharacterDetailsQuery(active_character);
 
   return (
-    <>
+    <div className="inventory-bg">
       {tokenLoading ? (
         "Loading..."
       ) : charDetails ? (
         <div className="row">
-          <div className="offset-1 col-3 align-self-center">
+          <div className="offset-1 col-3">
             <div className="mt-3 card card-body">
               <ul className="list-group list-group-flush">
-                <li className="list-group-item" style={{ textAlign: "center" }}>
+                <li
+                  className="h4 list-group-item"
+                  style={{ textAlign: "center" }}
+                >
                   {charDetails.character_name}
                 </li>
                 <li className="list-group-item" style={{ textAlign: "center" }}>
@@ -45,7 +48,11 @@ function CharacterDetailsPage(props) {
                       maxHeight: "250px",
                       maxWidth: "auto",
                     }}
-                    src={require(`./img/${charDetails.img_url}`)}
+                    src={
+                      charDetails
+                        ? require(`./img/${charDetails?.img_url}`)
+                        : ""
+                    }
                     className="img-thumbnail"
                     alt="class-img"
                   />
@@ -65,30 +72,28 @@ function CharacterDetailsPage(props) {
               </ul>
             </div>
           </div>
-          <div className="offset-1 col-6 align-self-center">
-            <div className="card card-body" style={{}}>
+          <div className="offset-1 col-6">
+            <div className="mt-3 card card-body" style={{}}>
               <li className="list-group-item">
                 <h2 style={{ textAlign: "center", margin: "25px" }}>
                   Inventory
                 </h2>
               </li>
-              <div className="row">
+              <div className="row" style={{ justifyContent: "start" }}>
                 {charDetails.character_inventory?.map((items, index) => (
                   <div className="col-3 text-center" key={index}>
-                    <div className="col">
-                      <div>
-                        <img
-                          style={{
-                            height: "50px",
-                            width: "50px",
-                          }}
-                          src={require(`./img/items/${items.img}`)}
-                          className="img-thumbnail"
-                          alt="class-img"
-                        />
-                      </div>
-                      <div>{items.name}</div>
+                    <div>
+                      <img
+                        style={{
+                          height: "50px",
+                          width: "50px",
+                        }}
+                        src={require(`./img/items/${items.img}`)}
+                        className="img-thumbnail"
+                        alt="class-img"
+                      />
                     </div>
+                    <div>{items.name}</div>
                   </div>
                 ))}
               </div>
@@ -99,7 +104,7 @@ function CharacterDetailsPage(props) {
       ) : (
         ""
       )}
-    </>
+    </div>
   );
 }
 
